@@ -262,18 +262,7 @@
 									</SELECT>
 								</div>
 								<div class="col-3">
-									<SELECT name="nbverres">
-										<OPTION value=""> Nb de verres consommés</OPTION>
-										<OPTION value="1"> 1</OPTION>
-										<OPTION value="2"> 2</OPTION>
-										<OPTION value="3"> 3</OPTION>
-										<OPTION value="4"> 4</OPTION>
-										<OPTION value="5"> 5</OPTION>
-										<OPTION value="6"> 6</OPTION>
-										<OPTION value="7"> 7</OPTION>
-										<OPTION value="8"> 8</OPTION>
-										<OPTION value="9"> 9</OPTION>
-									</SELECT>
+								<input type="number" name="nbverres"/>
 								</div>
 								<div class="col-2"></div>
 							</div>
@@ -291,15 +280,15 @@
 							</div>
 						</div>
 						<div class="col-12 paddingfooter">
-							
-						
+
+
+						</div>
+				</div>
+				<div class="col-1">
+					<img src="img/picture2.jpg" alt="img cool">
+				</div>
 			</div>
 		</div>
-		<div class="col-1">
-			<img src="img/picture2.jpg" alt="img cool">
-		</div>
-	</div>
-	</div>
 
 	</div>
 	<footer class="row">

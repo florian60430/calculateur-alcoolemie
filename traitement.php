@@ -31,22 +31,16 @@
     </div>
 
     <?php
-  
-
 
     $premierverre = $_POST['premierh'] . $_POST['derniermin'] . '00';
     $dernierverre = $_POST['dernierh'] . $_POST['derniermin'] . '00';
-
-
+    $quantite = intval($_POST['nbverres']);
     if ($_POST['dosage'] == 'bar') {
-
-        $dose = 10;
+        $dose = 10 * $quantite;
     } else if ($_POST['dosage'] == 'maison') {
-
-        $dose = 12.5;
+        $dose = 12.5 * $quantite;
     } else {
-
-        $dose = 15;
+        $dose = 15 * $quantite;
     }
     $localtime = localtime();
     $heureserv =  $_POST['heurenow'];
@@ -91,14 +85,6 @@
                     </div>
                     <div class="col-3">
                         <div class="row">
-                            <div class="col-7"> heure 1er verre</div>
-                            <div class="col-5">
-                                <?php echo $h_premier_verre; ?> h <?php echo $min_premier_verre; ?>
-                            </div>
-                            <div class="col-7"> dernier verre </div>
-                            <div class="col-5">
-                                <?php echo $h_dernier_verre; ?> h <?php echo $min_dernier_verre; ?>
-                            </div>
                             <div class="col-7"> heure du serveur </div>
                             <div class="col-5"> <?php echo $heureserv . 'h' . $minuteserv; ?></div>
                         </div>
@@ -106,27 +92,13 @@
                     <div class="col-3">
                         <div class="row">
                             <div class="col-6">Dosage</div>
-                            <div class="col-6">
-                                <?php if ($_POST['dosage'] == 'bar') {
-
-                                    $dose = $dose;
-                                } else if ($_POST['dosage'] == 'maison') {
-
-                                    $dose = $dose1;
-                                } else {
-
-                                    $dose = $dose2;
-                                }
-                                $reponse->closeCursor();
-                                echo $dose; ?> ml.
+                            <div class="col-6"> <?php echo $dose; ?>
+                                <div class="col-6">Nb de verres</div>
+                                <div class="col-6"><?php echo $_POST['nbverres'] ?></div>
                             </div>
-                            <div class="col-6">Nb de verres</div>
-                            <div class="col-6"><?php echo $verres ?></div>
-                            <div class="col-6">degr&egrave;s alcool</div>
-                            <div class="col-6"> <?php echo $degrealcool * 100 ?> %</div>
                         </div>
-                    </div>
 
+                    </div>
 
                     <?php
                     // Fonction qui calcul l'acoolméie pour homme et femme//
@@ -351,9 +323,9 @@
                             return 6;
                         }
                     }
-                    $tauxmax = Calcul_Taux_Alcool_Max($quantité, $degrealcool, $_POST['poid']);
+                    $tauxmax = Calcul_Taux_Alcool_Max($dose, $_POST['poid']);
                     $tauxmax = number_format($tauxmax, '2', '.', '');
-                    $newhoraire = Calcul_Temp_Max_Alcoolémie($_POST['repas'], $h_dernier_verre, $min_dernier_verre);
+                    $newhoraire = Calcul_Temp_Max_Alcoolémie($_POST['repas'], $_POST['dernierh'], $_POST['derniermin']);
                     $heuremax = $newhoraire[0];
                     $minutemax = $newhoraire[1];
                     $horairesobre = Calcul_temps_sobre($tauxmax, $heuremax, $minutemax);
@@ -363,8 +335,8 @@
                     $minutesobre = $horairesobre[1];
 
 
-                    $etat = calcul_montante_descente($h_dernier_verre, $min_dernier_verre, $heureserv, $minuteserv);
-                    $tauxnow = calcul_taux_now($_POST['sexe'], $tauxmax, $etat, $h_dernier_verre, $min_dernier_verre, $heureserv, $minuteserv);
+                    $etat = calcul_montante_descente($_POST['dernierh'], $_POST['derniermin'], $heureserv, $minuteserv);
+                    $tauxnow = calcul_taux_now($_POST['sexe'], $tauxmax, $etat, $_POST['dernierh'], $_POST['derniermin'], $heureserv, $minuteserv);
                     $indicetaux = affiche_phrase($tauxnow);
 
 
@@ -534,30 +506,30 @@
                                 </div>
                     </div>
                     </form>
-                    </div>
                 </div>
             </div>
-    
-                    <footer class="row">
-                        <div class="col-12 footertext1">
-                            Copyright © 2020 Amiens - France. Inc. Tous droits réservés.
-                        </div>
-                        <div class="offset-3"></div>
-                        <div class="col-2 footertext2">CALCULATEUR</div>
-                        <div class="col-2 footertext2">CONTRAT D'UTILISATION</div>
-                        <div class="col-2 footertext2">MENTIONS L&Eacute;GALES</div>
-                        <div class="offset-1"></div>
+        </div>
+        </div>
+        <footer class="row">
+            <div class="col-12 footertext1">
+                Copyright © 2020 Amiens - France. Inc. Tous droits réservés.
+            </div>
+            <div class="offset-3"></div>
+            <div class="col-2 footertext2">CALCULATEUR</div>
+            <div class="col-2 footertext2">CONTRAT D'UTILISATION</div>
+            <div class="col-2 footertext2">MENTIONS L&Eacute;GALES</div>
+            <div class="offset-1"></div>
 
-                </div>
-                <div class="col-12 footerline"></div>
-                <div class="col-12">
-                    <div class="row">
-                        <div class="offset-4"></div>
-                        <div class="col-2 footertext3">Developped and designed by :</div>
-                        <div class="col-2 footertext4">Florian Wantelez, Mattei Freisi</div>
-                    </div>
-                </div>
-            </div>
+    </div>
+    <div class="col-12 footerline"></div>
+    <div class="col-12">
+        <div class="row">
+            <div class="offset-4"></div>
+            <div class="col-2 footertext3">Developped and designed by :</div>
+            <div class="col-2 footertext4">Florian Wantelez, Mattei Freisi</div>
+        </div>
+    </div>
+    </div>
 </body>
 
 </html>
