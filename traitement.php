@@ -31,57 +31,22 @@
     </div>
 
     <?php
-    // INSERER DANS TABLE conso alcool verres et heure //
-    try {
-        // CONNEXION A LA BDD //
+  
 
-        $bdd = new PDO('mysql:host=localhost; dbname=bddalcool; charset=utf8', 'root', '');
-        $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch (Exception $e) {
-        die('Erreur :' . $e->getMessage());
-    }
-    // On vide dabord la table
-    $del = 'DELETE FROM conso';
-    $bdd->exec($del);
 
-    // INSERT DU TEMPS, id ALCOOL, VERRE, Et quantité dans la table "conso" // 
     $premierverre = $_POST['premierh'] . $_POST['derniermin'] . '00';
     $dernierverre = $_POST['dernierh'] . $_POST['derniermin'] . '00';
-    $req = $bdd->prepare('INSERT INTO conso(id_alcool, verres, heure_premier_verre, 
-    heure_dernier_verre) VALUES(?, ?, ?, ?)');
-    $req->execute(array($_POST['choixalcool1'], $_POST['nbverres'], $premierverre, $dernierverre));
 
-    //Jointure : entre l'id alcool dans conso et le degreAlcoolisation dans alcool en fonction de son id
-    $reponse = $bdd->query('SELECT * FROM alcool INNER JOIN conso ON alcool.id_Alcool = conso.id_alcool');
-
-    // select de tout la table conso pour recupérer les info que je vais injecter dans les fonctions calculs
-    $reponse2 = $bdd->query('SELECT * FROM conso');
-    while ($donnes = $reponse->fetch()) {
-        // on stock les données de la bdd dans donnes et donnes2
-        $degrealcool = $donnes['DegreAlcoolisation'] / 100;
-        $dose = $donnes['dosage_maison'];
-        $dose1 = $donnes['dosage_bar'];
-        $dose2 = $donnes['dosage_fort'];
-    }
-    while ($donnes2 = $reponse2->fetch()) {
-        $verres = $donnes2['verres'];
-
-        $h_premier_verre = $_POST['premierh'];
-        $min_premier_verre = $_POST['premiermin'];
-
-        $h_dernier_verre = $_POST['dernierh'];
-        $min_dernier_verre = $_POST['derniermin'];
-    }
 
     if ($_POST['dosage'] == 'bar') {
 
-        $quantité = $dose * $verres;
+        $dose = 10;
     } else if ($_POST['dosage'] == 'maison') {
 
-        $quantité = $dose1 * $verres;
+        $dose = 12.5;
     } else {
 
-        $quantité = $dose2 * $verres;
+        $dose = 15;
     }
     $localtime = localtime();
     $heureserv =  $_POST['heurenow'];
@@ -165,15 +130,15 @@
 
                     <?php
                     // Fonction qui calcul l'acoolméie pour homme et femme//
-                    function Calcul_Taux_Alcool_Max($volume, $degre, $masse)
+                    function Calcul_Taux_Alcool_Max($dose,  $masse)
                     {
                         if ($_POST['sexe'] === 'Homme') {
 
-                            $taux = ($volume * $degre * 0.8) / (0.7 * $masse);
+                            $taux = ($dose) / (0.7 * $masse);
                             return $taux;
                         } else {
 
-                            $taux = ($volume * $degre * 0.8) / (0.6 * $masse);
+                            $taux = ($dose) / (0.6 * $masse);
                             return $taux;
                         }
                     }

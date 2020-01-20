@@ -275,29 +275,7 @@
 										<OPTION value="9"> 9</OPTION>
 									</SELECT>
 								</div>
-								<div class="col-2">
-									<SELECT name="choixalcool1">
-										<OPTION value="0"> Choix alcool </OPTION>
-										<?php 	// CONNEXION A LA BDD // 
-										try {
-											$bdd = new PDO('mysql:host=localhost; dbname=bddalcool; charset=utf8', 'root', '');
-											$bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-										} catch (Exception $e) {
-											// En cas d'erreur, on affiche un message et on arrête tout
-											die('Erreur : ' . $e->getMessage());
-										}
-										$reponse = $bdd->query('SELECT * FROM alcool');
-										while ($donnes = $reponse->fetch()) {
-										?>
-
-											<OPTION value="<?php echo $donnes['id_Alcool'] ?>">
-											<?PHP echo $donnes['Nom'];
-											echo " (" . $donnes['DegreAlcoolisation'] . "%)";
-										}
-										$reponse->closeCursor(); ?>
-											</OPTION>
-									</SELECT>
-								</div>
+								<div class="col-2"></div>
 							</div>
 						</div>
 						<div class="col-12 padding">
@@ -313,119 +291,8 @@
 							</div>
 						</div>
 						<div class="col-12 paddingfooter">
-							<div class="row">
-								<div class="col-4 text paddingbot">
-									<form method="post" action="insertion.php">
-										<input type="button" onClick="bascule('boite');" value="Ajouté un alcool">
-										<div name="boite" id="boite" style="visibility: hidden">
-											<!--c'est le bouton pour afficher le formulaire -->
-											<div class="col-12">Nom de l'acool
-												<input type="text" name="other" size="8" class=" buttonfooter1">
-											</div>
-											<div class="col-12">
-												degrès de l'acool (en %)
-												<input type="text" name="others" size="2" class="buttonfooter2">
-											</div>
-											<div class="col-12">
-												<input type="submit" value="Ajouter" /> <!-- C'est le bouton pour envoyer le nouvelle alcool-->
-											</div>
-										</div>
-									</form>
-									<script language="Javascript">
-										// le script permet juste d'afficher le formulaire 
-										// quand on click sur ajouter un nouvelle alocool //
-										function bascule(elem) {
-											etat = document.getElementById(elem).style.visibility;
-											if (etat == "hidden") {
-												document.getElementById(elem).style.visibility = "visible";
-											} else {
-												document.getElementById(elem).style.visibility = "hidden";
-											}
-										}
-									</script>
-								</div>
-								<div class="col-4 text">
-									<form method="post" action="supprimer.php">
-										<input type="button" onClick="bascule('boite2');" value="Supprimer un alcool">
-										<div class="text" name="boite2" id="boite2" style="visibility: hidden">
-
-											<SELECT name="alcooldelete">
-												<OPTION value=""> CHOIX </OPTION>
-
-												<?php 	// CONNEXION A LA BDD // 
-												try {
-													$bdd = new PDO('mysql:host=localhost; dbname=bddalcool; charset=utf8', 'root', '');
-												} catch (Exception $e) {
-													// En cas d'erreur, on affiche un message et on arrête tout
-													die('Erreur : ' . $e->getMessage());
-												}
-
-												$reponse = $bdd->query('SELECT * FROM alcool');
-												while ($donnes = $reponse->fetch()) {
-												?>
-													<OPTION value="<?php echo $donnes['id_Alcool'] ?>">
-													<?PHP echo $donnes['Nom'];
-													echo " (" . $donnes['DegreAlcoolisation'] . "%)";
-												}
-												$reponse->closeCursor(); ?>
-													</OPTION>
-											</SELECT>
-											<input type="submit" value="SUPP" />
-									</form>
-								</div>
-							</div>
-							<div class="col-4 text">
-								<form method="post" action="update.php">
-									<input type="button" onClick="bascule('boite3');" value="Modifier l'acoolémie">
-									<div name="boite3" id="boite3" style="visibility: hidden">
-
-										<SELECT name="alcoolupdate">
-
-											<OPTION value=""> CHOIX</OPTION>
-
-
-
-											<?php 	// CONNEXION A LA BDD // 
-											try {
-												$bdd = new PDO('mysql:host=localhost; dbname=bddalcool; charset=utf8', 'root', '');
-											} catch (Exception $e) {
-												// En cas d'erreur, on affiche un message et on arrête tout
-												die('Erreur : ' . $e->getMessage());
-											}
-											$reponse = $bdd->query('SELECT * FROM alcool');
-											while ($donnes = $reponse->fetch()) {
-											?>
-
-												<OPTION value="<?php echo $donnes['id_Alcool'] ?>">
-												<?PHP echo $donnes['Nom'];
-												echo " (" . $donnes['DegreAlcoolisation'] . "%)";
-											}
-											$reponse->closeCursor() ?>
-												</OPTION>
-
-										</SELECT>
-										<div> Nouveau degr&egrave;s d'alcool&eacute;mie (en %) :
-											<input type="text" name="updatedegre" size="3" class="buttonfooter3" /> %
-										</div>
-										<div>
-											<input type="submit" value="MODIF" />
-										</div>
-								</form>
-							</div>
-						</div>
-
-						<script language="Javascript">
-							// le script permet juste d'afficher le formulaire 
-							function bascule(elem) {
-								etat = document.getElementById(elem).style.visibility;
-								if (etat == "hidden") {
-									document.getElementById(elem).style.visibility = "visible";
-								} else {
-									document.getElementById(elem).style.visibility = "hidden";
-								}
-							}
-						</script>
-				</div>
+							
+						
 			</div>
 		</div>
 		<div class="col-1">
