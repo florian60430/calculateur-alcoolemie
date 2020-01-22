@@ -1,3 +1,5 @@
+
+
 .text{
 
   font-size: 17px;
@@ -49,6 +51,14 @@ body {
   background-color:#d8d8d8 ;
 }
 
+.input2, .SELECT2 {
+
+  border-radius: 7px;
+  width: 100%;
+  border: 2px solid #545454;
+  color: #464646;
+}
+
 input, SELECT {
 
   border-radius: 7px;
@@ -89,8 +99,8 @@ button {
 
 margin-top: 2.5%;
 }
-
 /*
+
 [class*="col-"], footer {
  
   border: 2px solid black;
@@ -106,6 +116,11 @@ margin-top: 2.5%;
 .padding {
 
 margin-top: 3%;
+}
+.marginright{
+
+margin-left: 30px;
+
 }
 
 .marginlft{
