@@ -1,5 +1,4 @@
 
-
 .text{
 
   font-size: 17px;
@@ -54,10 +53,6 @@ body {
   font-family: 'Questrial', sans-serif;
   background-color:#d8d8d8 ;
 }
-
-
-
-
 
 input, SELECT {
 
@@ -153,7 +148,7 @@ margin-left: 30px;
 
 .paddingfooter{
 
-  margin-top : 15%;
+  margin-top : 25%;
 }
 
 .footertext1{
@@ -194,4 +189,16 @@ margin-left: 30px;
   color: #354055;
   text-align: left;
   margin-left: -20px;
+}
+
+.paddingbot {
+
+margin-bottom: 4.5%;
+}
+footer {
+
+  background-color:black;
+  padding-top: 15px;
+  padding-bottom: 25px;
+
 }

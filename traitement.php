@@ -335,6 +335,11 @@
                     $indicetaux = affiche_phrase($tauxnow);
 
 
+                    $heureConfirmer = intval($horairelegal[0]);
+                    $minuteConfirmer = intval($horairelegal[1]);
+
+                    $heurejeune = $horairelegaljeune[0];
+                    $minutejeune = $horairelegaljeune[1];
                     ?>
                     <div class="col-3">
                         <div class="row">
@@ -414,7 +419,15 @@
                     } else {
                         echo  ' l\'avez atteind';
                     }
-                    echo ' à <b>' . $heuremax . 'h' . $minutemax . '</b>'; ?>
+                    if ($minutemax < 10) {
+
+
+                        echo ' à <b>' . $heuremax . 'h0' . $minutemax . '</b>';
+                    } else {
+
+                        echo ' à <b>' . $heuremax . 'h' . $minutemax . '</b>';
+                    } ?>
+
                 </div>
             </div>
             <div class="col-12">
@@ -433,7 +446,14 @@
                             }
                             if ($heuresobre >= 24) {
                                 $heuresobre = $heuresobre - 24;
-                                echo '<div> Vous serrez sobre demain à <b>' . $heuresobre . "h" . $minutesobre . "</b></div>";
+
+                                if ($minutesobre < 10) {
+
+                                    echo '<div> Vous serrez sobre demain à <b>' . $heuresobre . "h0" . $minutesobre . "</b></div>";
+                                } else {
+
+                                    echo '<div> Vous serrez sobre demain à <b>' . $heuresobre . "h" . $minutesobre . "</b></div>";
+                                }
                             } else {
 
 
@@ -451,8 +471,15 @@
                         <?php if ($tauxnow < 0.50) {
                             echo '<div class="green"> <b>vous êtes en dessous du seuil légal des 0.50 g/L pour un conducteur confirmé vous pouvez donc conduire</b> </div>';
                         } else { ?>
-                            <div class="rouge"><b> Pour un conducteur confirmer vous passerez le seuil légale des 0.50g/L à
-                                <?php echo '<u>' . $horairelegal[0] . 'h' . $horairelegal[1] . '</u>';
+                            <div class="rouge"><b> Pour un conducteur confirmer vous passerez le seuil l&eacute;gal des 0.50g/L à
+                                <?php
+
+                                if ($minuteConfirmer < 10) {
+
+                                    echo '<u>' . $heureConfirmer . 'h0' . $minuteConfirmer . '</u>';
+                                } else {
+                                    echo '<u>' . $heureConfirmer . 'h' . $minuteConfirmer . '</u>';
+                                }
                             } ?></b>
                             </div>
                             <div class="col-12">
@@ -460,8 +487,13 @@
                                     echo '<div class="green"> <b>vous êtes en dessous du seuil légal des 0.20 g/L jeune conducteur vous pouvez donc conduire </b></div>';
                                 } else { ?>
 
-                                    <div class="rouge"><b> Pour un jeune conducteur vous passerez le seuil légale des 0.20g/L à
-                                        <?php echo '<u>' . $horairelegaljeune[0] . 'h' . $horairelegaljeune[1] . '</u>';
+                                    <div class="rouge"><b> Pour un jeune conducteur vous passerez le seuil l&eacute;gal des 0.20g/L à
+                                        <?php if ($minutejeune < 10) {
+
+                                            echo '<u>' . $heurejeune . 'h0' . $minutejeune . '</u>';
+                                        } else {
+                                            echo '<u>' . $heurejeune . 'h' . $minutejeune . '</u>';
+                                        }
                                     } ?></b>
                                     </div>
                             </div>
@@ -479,15 +511,15 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <p>
-                                                Le foie élimine 95% de l'alcool dans le corps à raison de 0.10 à 0.20 g/l pour un homme et
+                                                Le foie &eacute;limine 95% de l'alcool dans le corps à raison de 0.10 à 0.20 g/l pour un homme et
                                                 0.085 à 0.10 g/l pour une femme pour nos calculs nous avons utilisé 0.15g/L pour un homme et
                                                 0.09 g/L pour une femme ou genre indéfinie les calculs ne prennent pas en compte les 5% restants
-                                                éliminer par l'air expiré et les urines
+                                                &eacute;liminer par l'air expiré et les urines
                                             </p>
                                         </div>
                                         <div class="col-12 padding">
                                             <p>
-                                                après ingestion d'un verre d'alcool le taux maximum est atteint 1h après et 30 min si on est à jeun
+                                                apr&egrave;s ingestion d'un verre d'alcool le taux maximum est atteint 1h apr&egrave;s et 30 min si on est à jeun
                                             </p>
                                         </div>
                                     </div class="col-12 center padding">
@@ -496,7 +528,7 @@
                                     <p>- une dose forte correspond à 0.15g d'acool pur dans un verre</p>
 
                                     <div class="col-12 padding">
-                                        <p>l'intervalle d'incertitude est de {+5% et -0.5%} c'est-à-dire que les résultats seront plus souvent au-dessus qu'en dessous de la réalité
+                                        <p>l'intervalle d'incertitude est de {+5% et -0.5%} c'est-à-dire que les r&eacute;sultats seront plus souvent au-dessus qu'en dessous de la r&eacute;alit&eacute;
                                     </div>
                                 </div>
                     </div>

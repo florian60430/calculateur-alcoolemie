@@ -180,27 +180,26 @@
 			</div>
 		</div>
 	</div>
-</body>
-<footer class="row">
-	<div class="col-12 footertext1">
-		Copyright © 2020 Amiens - France. Inc. Tous droits réservés.
-	</div>
-	<div class="offset-3"></div>
-	<div class="col-2 footertext2">CALCULATEUR</div>
-	<div class="col-2 footertext2">CONTRAT D'UTILISATION</div>
-	<div class="col-2 footertext2">MENTIONS L&Eacute;GALES</div>
-	<div class="offset-1"></div>
-
-	</div>
-	<div class="col-12 footerline"></div>
-	<div class="col-12">
-		<div class="row">
-			<div class="offset-4"></div>
-			<div class="col-2 footertext3">Developped and designed by :</div>
-			<div class="col-2 footertext4">Florian Wantelez, Mattei Freisi</div>
+	<footer class="row">
+		<div class="col-12 footertext1">
+			Copyright © 2020 Amiens - France. Inc. Tous droits réservés.
 		</div>
-	</div>
-	</div>
-</footer>
+		<div class="offset-3"></div>
+		<div class="col-2 footertext2">CALCULATEUR</div>
+		<div class="col-2 footertext2">CONTRAT D'UTILISATION</div>
+		<div class="col-2 footertext2">MENTIONS L&Eacute;GALES</div>
+		<div class="offset-1"></div>
+
+		</div>
+		<div class="col-12 footerline"></div>
+		<div class="col-12">
+			<div class="row">
+				<div class="offset-4"></div>
+				<div class="col-2 footertext3">Developped and designed by :</div>
+				<div class="col-2 footertext4">Florian Wantelez, Mattei Freisi</div>
+			</div>
+		</div>
+		</div>
+</body>
 
 </html>
