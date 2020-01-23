@@ -26,7 +26,7 @@
 		<div class="row title2">
 			<div class="offset-4"></div>
 			<div class="col-4">
-				D'ALCOOL&Eacute;MIE</div> <!-- 2ème ligne du Header -->
+				D'ALCOOL&Eacute;MIE</div> <!-- 2ème ligne  Header -->
 		</div>
 		<div class="offset-4"></div>
 	</div>
