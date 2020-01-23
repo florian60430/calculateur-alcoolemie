@@ -36,34 +36,6 @@
 			<div class="row">
 				<div class="col-11 padding">
 					<form method="post" action="traitement.php">
-						<div class="col-12 text">
-							<div class="row">
-								<div class="offset-2"></div>
-								<div class="col-3">
-									Entrez l'heure actuelle :
-								</div>
-								<!-- Select de l'heure acutelle -->
-								<div class="col-1 marginlft">
-									<SELECT name="heurenow" size="1">
-										<OPTION value="?"> h</OPTION>
-
-										<?php for ($i = 0; $i < 24; $i++) {
-											echo "<OPTION value=" . $i . "> " . $i . "h</OPTION>";
-										} ?>
-
-									</SELECT>
-								</div>
-								<!-- Select de des minutes acutelle -->
-								<div class="col-1 marginlft">
-									<SELECT name="minutenow" size="1">
-										<OPTION value="">min</OPTION>
-										<?php for ($i = 0; $i <= 59; $i++) {
-											echo "<OPTION value=" . $i . "> " . $i . "min</OPTION>";
-										} ?>
-									</SELECT>
-								</div>
-							</div>
-						</div>
 						<div class="col-12 padding">
 							<div class="row">
 								<div class="offset-2"></div>
@@ -77,7 +49,7 @@
 								<div class="offset-2"></div>
 								<div class="col-2">
 									<!-- Select du sexe de l'utilisateur -->
-									<SELECT name="sexe">
+									<SELECT name="sexe" required>
 										<OPTION value=""> Sexe </OPTION>
 										<OPTION value="Homme"> Homme </OPTION>
 										<OPTION value="Femme"> Femme </OPTION>
@@ -100,7 +72,7 @@
 								</div>
 								<div class="col-1">
 									<!-- Select du repas -->
-									<SELECT name="repas">
+									<SELECT name="repas" required>
 										<OPTION value=""> -- </OPTION>
 										<OPTION value="oui"> oui </OPTION>
 										<OPTION value="non"> non </OPTION>
@@ -118,8 +90,8 @@
 								<div class="col-2 padding text">Premier verre</div>
 								<div class="col-1 padding marginlft2">
 									<!-- Select de l'heure du premier verre -->
-									<SELECT name="premierh">
-										<OPTION value="?"> h</OPTION>
+									<SELECT name="premierh" required>
+										<OPTION value=""> h</OPTION>
 
 										<?php for ($i = 0; $i < 24; $i++) {
 											echo "<OPTION value=" . $i . "> " . $i . "h</OPTION>";
@@ -129,8 +101,8 @@
 								</div>
 								<!-- Select des minutes du premier verre -->
 								<div class="col-1 padding marginlft">
-									<SELECT name="premiermin">
-										<OPTION value="?">min</OPTION>
+									<SELECT name="premiermin" required>
+										<OPTION value="">min</OPTION>
 
 										<?php for ($i = 0; $i < 60; $i++) {
 											echo "<OPTION value=" . $i . "> " . $i . "min</OPTION>";
@@ -141,8 +113,8 @@
 								<div class="col-2 padding text"> Dernier verre </div>
 								<div class="col-1 padding marginlft2">
 									<!-- Select de l'heure du dernier verre -->
-									<SELECT name="dernierh">
-										<OPTION value="?"> h</OPTION>
+									<SELECT name="dernierh" required>
+										<OPTION value=""> h</OPTION>
 
 										<?php for ($i = 0; $i < 24; $i++) {
 											echo "<OPTION value=" . $i . "> " . $i . "h</OPTION>";
@@ -152,8 +124,8 @@
 								</div>
 								<div class="col-1 padding marginlft">
 									<!-- Select des minutes du dernier verre -->
-									<SELECT name="derniermin">
-										<OPTION value="?">min</OPTION>
+									<SELECT name="derniermin" required>
+										<OPTION value="">min</OPTION>
 
 										<?php for ($i = 0; $i < 60; $i++) {
 											echo "<OPTION value=" . $i . "> " . $i . "min</OPTION>";
@@ -174,8 +146,8 @@
 									<div class="offset-4"></div>
 									<div class="col-2">
 										<!-- Select des du dosage-->
-										<SELECT name="dosage">
-											<OPTION value="Dosage">Dosage</OPTION>
+										<SELECT name="dosage" required>
+											<OPTION value="">Dosage</OPTION>
 											<OPTION value="bar"> BAR (STANDARD)</OPTION>
 											<OPTION value="maison"> MAISON </OPTION>
 											<OPTION value="fort"> FORT </OPTION>
@@ -230,4 +202,5 @@
 	</div>
 	</div>
 </footer>
+
 </html>

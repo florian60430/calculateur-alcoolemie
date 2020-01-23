@@ -43,8 +43,8 @@
         $dose = 15 * $quantite;
     }
     $localtime = localtime();
-    $heureserv =  $_POST['heurenow'];
-    $minuteserv =  $_POST['minutenow'];
+    $heureserv =  date('h');
+    $minuteserv = date('i');
     ?>
     <div class="container">
         <form method="post" action="insertion.php">
@@ -87,18 +87,13 @@
                         <div class="row">
                             <div class="col-7"> heure du serveur </div>
                             <div class="col-5"> <?php echo $heureserv . 'h' . $minuteserv; ?></div>
+                            <div class="col-7">Dosage</div>
+                            <div class="col-5"> <?php echo $dose; ?></div>
+                            <div class="col-7">Nb de verres</div>
+                            <div class="col-5"><?php echo $_POST['nbverres'] ?></div>
                         </div>
                     </div>
-                    <div class="col-3">
-                        <div class="row">
-                            <div class="col-6">Dosage</div>
-                            <div class="col-6"> <?php echo $dose; ?>
-                                <div class="col-6">Nb de verres</div>
-                                <div class="col-6"><?php echo $_POST['nbverres'] ?></div>
-                            </div>
-                        </div>
 
-                    </div>
 
                     <?php
                     // Fonction qui calcul l'acoolméie pour homme et femme//
@@ -485,14 +480,14 @@
                                         <div class="col-12">
                                             <p>
                                                 Le foie élimine 95% de l'alcool dans le corps à raison de 0.10 à 0.20 g/l pour un homme et
-                                                0.085 à 0.10 g/l pour une femme pour nos calculs nous avons utiliser 0.15g/L pour un homme et
-                                                0.09 g/L pour une femme ou genre indéfinie les calculs ne prennent pas en compte les 5% restant
+                                                0.085 à 0.10 g/l pour une femme pour nos calculs nous avons utilisé 0.15g/L pour un homme et
+                                                0.09 g/L pour une femme ou genre indéfinie les calculs ne prennent pas en compte les 5% restants
                                                 éliminer par l'air expiré et les urines
                                             </p>
                                         </div>
                                         <div class="col-12 padding">
                                             <p>
-                                                apès injestion d'un verre d'alcool le taux maxium est atteind 1h apès et 30min si on est a jeun
+                                                après ingestion d'un verre d'alcool le taux maximum est atteint 1h après et 30 min si on est à jeun
                                             </p>
                                         </div>
                                     </div class="col-12 center padding">
@@ -501,7 +496,7 @@
                                     <p>- une dose forte correspond à 0.15g d'acool pur dans un verre</p>
 
                                     <div class="col-12 padding">
-                                        <p>l'intervalle d'insertitude est de {+5% et -0.5%} c'est à dire que les résultat seront plus souvent au dessus qu'en dessous de la réalité
+                                        <p>l'intervalle d'incertitude est de {+5% et -0.5%} c'est-à-dire que les résultats seront plus souvent au-dessus qu'en dessous de la réalité
                                     </div>
                                 </div>
                     </div>
@@ -509,27 +504,27 @@
                 </div>
             </div>
         </div>
+    </div>
+    <footer class="row">
+        <div class="col-12 footertext1">
+            Copyright © 2020 Amiens - France. Inc. Tous droits réservés.
         </div>
-        <footer class="row">
-            <div class="col-12 footertext1">
-                Copyright © 2020 Amiens - France. Inc. Tous droits réservés.
-            </div>
-            <div class="offset-3"></div>
-            <div class="col-2 footertext2">CALCULATEUR</div>
-            <div class="col-2 footertext2">CONTRAT D'UTILISATION</div>
-            <div class="col-2 footertext2">MENTIONS L&Eacute;GALES</div>
-            <div class="offset-1"></div>
+        <div class="offset-3"></div>
+        <div class="col-2 footertext2">CALCULATEUR</div>
+        <div class="col-2 footertext2">CONTRAT D'UTILISATION</div>
+        <div class="col-2 footertext2">MENTIONS L&Eacute;GALES</div>
+        <div class="offset-1"></div>
 
-    </div>
-    <div class="col-12 footerline"></div>
-    <div class="col-12">
-        <div class="row">
-            <div class="offset-4"></div>
-            <div class="col-2 footertext3">Developped and designed by :</div>
-            <div class="col-2 footertext4">Florian Wantelez, Mattei Freisi</div>
         </div>
-    </div>
-    </div>
+        <div class="col-12 footerline"></div>
+        <div class="col-12">
+            <div class="row">
+                <div class="offset-4"></div>
+                <div class="col-2 footertext3">Developped and designed by :</div>
+                <div class="col-2 footertext4">Florian Wantelez, Mattei Freisi</div>
+            </div>
+        </div>
+        </div>
 </body>
 
 </html>
