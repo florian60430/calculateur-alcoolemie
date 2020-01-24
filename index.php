@@ -4,14 +4,16 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+	<meta name="description" content="calculateur d'alcoolémie en ligne, vous permez de calculer et donner une aproximation de votre taux d'alcool dans le sang en g/l un conducteur possédant un permis probatoire ne peux pas conduire avec un taux supérieur à 20g/l alors qu'un conducteur confirmé ne peux pas conduire avec un taux supérieure à 0,50g/L" />
+	<meta name="keywords" content="alcoolémie, calculer son alcoolémie, taux d'alcoolémie, jeune conducteur, alcool, taux, taux d'alcool, alcool dans le sang" />
 
 	<link href="bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet"> <!-- Bootstrap (pour le design) -->
 	<link href="style1.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Questrial&display=swap" rel="stylesheet"> <!-- Plice d'écriturte -->
 
 
-	<title>PICOLO CALCULATOR</title>
+
+	<title>Calculateur d'alcol&eacute;mie en ligne gratuit</title>
 </head>
 
 <body>
