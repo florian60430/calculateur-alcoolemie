@@ -9,13 +9,13 @@ input, SELECT {
 
 .padding{
 
-margin-top: 1.5%;
+margin-top: 3%;
 }
 
 SELECT{
 
-  font-size: 17px;
-  width: 140%;
+  font-size: 20px;
+  width: 150%;
   height: 110%;
 }
 
@@ -23,14 +23,14 @@ input {
 
 
   text-align : center;
-  font-size : 17px;
-  width: 140%;
+  font-size : 20px;
+  width: 150%;
   height: 110%;
 }
 
 .text{    
 
-  font-size: 17px;
+  font-size: 20px;
   margin-left: -6%;
   }
 
@@ -53,7 +53,7 @@ button {
   border-color : black;
   border : 1px solid #000000;
   width: 65%;
-  height: 140%;
+  height: 120%;
   margin-left: 15%;
   margin-top: 5%;
 }
@@ -67,7 +67,7 @@ button {
 .title {
 
     text-align: center;
-    font-size: 27px;
+    font-size: 28px;
     color: white;
     font-weight: 700;
     }
@@ -75,7 +75,7 @@ button {
 .title2 {
 
     text-align: center;
-    font-size: 27px;
+    font-size: 28px;
     color: white;
     margin-top: -3.5%;
     font-weight: 700;
@@ -83,7 +83,7 @@ button {
 
 .paddingfooter{
 
-  margin-top : 50%;
+  margin-top : 37.5%;
 }
 
 .marginlft2 {
@@ -98,7 +98,7 @@ button {
 
 .marginlft3{
 
-    margin-left: -5%;
+    margin-left: -7%;
 }
 
 .marginlft4{
