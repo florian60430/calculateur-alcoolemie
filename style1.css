@@ -1,7 +1,11 @@
 
-.text{
+@media screen and (min-width: 1200px)
 
-  font-size: 17px;
+{
+  .text{
+
+    font-size: 17px;
+  }
 }
 
 img {
@@ -53,26 +57,30 @@ body {
   font-family: 'Questrial', sans-serif;
   background-color:#d8d8d8 ;
 }
+ 
+
+/* BOUTON FORMULAIRE ECT */
 
 input, SELECT {
 
-  border-radius: 7px;
-  width: 100%;
-  border: 1px solid #b4b4b4;
-  color: #464646;
-}
+    border-radius: 7px;
+    width: 100%;
+    border: 1px solid #b4b4b4;
+    color: #464646;
+  }
 
-SELECT{
+  SELECT{
 
-  font-size: 17px;
-}
+    font-size: 17px;
+  }
 
-input {
+  input {
 
 
-  text-align : center;
-  font-size : 15px;
-}
+    text-align : center;
+    font-size : 15px;
+
+  }
 
 button {
 
@@ -82,18 +90,9 @@ button {
   border-color : black;
   border : 1px solid #000000;
   width: 100%;
-  height: 100%;
-}
-
-.size{
-
-  margin-bottom: 20%;
-}
-
-.bordur {
-
-margin-top: 2.5%;
-}
+  height: 100px;
+  margin-left: -80px;
+  }
 
 /*
 [class*="col-"], footer {
@@ -118,33 +117,30 @@ margin-left: 30px;
 
 }
 
+
 .marginlft{
 
-  margin-left: -25px;
+  margin-left: -55px;
 }
+
 .marginlft2{
 
-  margin-left: -60px;
-}
-
-.buttonfooter1 {
-
-  width: 66%;
-
+margin-left: -25px;
 
 }
-.buttonfooter2 {
 
-  width: 25%;
+.marginlft3{
 
+  margin-left: -40px;
+  
+  }
 
-}
-.buttonfooter3 {
+  .marginlft4{
 
-  width: 25%;
+    margin-left: -20px;
+    
+    }
 
-
-}
 
 .paddingfooter{
 
@@ -195,6 +191,9 @@ margin-left: 30px;
 
 margin-bottom: 4.5%;
 }
+
+
+
 footer {
 
   background-color:black;
