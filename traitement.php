@@ -10,6 +10,9 @@
     <link href="traitement.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Questrial&display=swap" rel="stylesheet">
 
+<!-- Ajouter si taux alcool trop haut afficher "vous êtes mort" si le taux est trop haut
+afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
+<!-- ajouter l'algo perte d'alcool qui commence a la fin de la consommation -->
 
     <title>PICOLO CALCULATOR</title>
 </head>
