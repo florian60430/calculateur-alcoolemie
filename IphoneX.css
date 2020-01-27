@@ -9,7 +9,7 @@ input, SELECT {
 
 .padding{
 
-margin-top: 3%;
+margin-top: 1.5%;
 }
 
 SELECT{
@@ -41,7 +41,7 @@ footer {
   padding-bottom: 10px;
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 105%;
   height: 6%;
 }
 
