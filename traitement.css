@@ -81,7 +81,7 @@ SELECT{
 .info{
 
 font-weight: 700;
-font-size: 25px;
+font-size: 28px;
 }
 .bordur {
 
@@ -102,7 +102,7 @@ input {
 .tauxnow {
 
   text-align: center;
-  font-size: 80px;
+  font-size: 130px;
   font-weight: 700;
 }
 
@@ -227,4 +227,9 @@ footer {
   padding-top: 15px;
   padding-bottom: 25px;
 
+}
+
+.paddingtitle{
+
+margin-top: 10%;
 }

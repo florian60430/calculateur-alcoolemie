@@ -8,6 +8,8 @@
 
     <link href="bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet"> <!-- Bootstrap (pour le design) -->
     <link href="traitement.css" rel="stylesheet">
+    <link rel="stylesheet" media="screen and (min-width: 767px) and (max-width: 992px) " href="traitement_md.css" /> <!-- Pour ceux qui ont une résolution inférieure à 992px -->
+    <link rel="stylesheet" media="screen and (min-width: 575px) and (max-width: 767px)" href="traitement_sm.css" /> <!-- Pour ceux qui ont une résolution inférieure à 767px -->
     <link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 575px)" href="traitement_xs.css" /> <!-- Pour ceux qui ont une résolution inférieure à 575px -->
     <link href="https://fonts.googleapis.com/css?family=Questrial&display=swap" rel="stylesheet">
 
@@ -94,7 +96,7 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
             return array($heure, $minute);
         }
 
-        function calcul_taux_now($sexe, $taux, $etat, $hmax, $minmax, $h, $min)
+        function calcul_taux_now($sexe, $taux, $etat, $hmax, $minmax, $h, $min, $Periode)
         {
             if ($h < $hmax) {
 
@@ -115,21 +117,25 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
 
 
                     $tauxnow = $taux - 0.0025 * $rest;
+                    $tauxnow = $taux - 0.0025*$Periode;
                 } else {
 
                     $rest =  $servheure - $lastheure; //  389
 
 
                     $tauxnow = $taux - 0.0015 * $rest;
+                    $tauxnow = $taux - 0.0015*$Periode;
                 }
             } else {
 
                 if ($sexe == "Homme") {
+                    
                     $rest =  $servheure - $lastheure;
-
                     $perte =  0.0025 * $rest;
                     $heuremax =  ($lastheure + 60);
                     $tauxnow = $taux * $servheure / $heuremax;
+                    $tauxnow = $taux - 0.0025*$Periode;
+                
                 } else {
 
                     $rest =  $servheure - $lastheure;
@@ -137,6 +143,7 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
                     $perte =  0.0015 * $rest;
                     $heuremax =  ($lastheure + 60);
                     $tauxnow = $taux * $servheure / $heuremax;
+                    $tauxnow = $taux - 0.0015*$Periode;
                 }
             }
 
@@ -276,8 +283,10 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
                 return 4;
             } else if ($tauxnow > 1.5 && $tauxnow <= 2) {
                 return 5;
-            } else {
+            } else if ($tauxnow >2 && $tauxnow <= 2.5) {
                 return 6;
+            }else {
+                return 7;
             }
         }
 // Fonction qui calcule la période durant laquelle l'utilisateur à bus
@@ -293,10 +302,7 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
         }
         
         // fonction qui calcul le taux d'alcool que l'utilisateur à éléminer pendant sa consomation // 
-        function calculperte(){
-
-
-        }
+        $Periode = calculperiode($_POST['premierh'], $_POST['premiermin'], $_POST['dernierh'], $_POST['derniermin']);
         $tauxmax = Calcul_Taux_Alcool_Max($dose, $_POST['poid']);
         $tauxmax = number_format($tauxmax, '2', '.', '');
         $newhoraire = Calcul_Temp_Max_Alcoolémie($_POST['repas'], $_POST['dernierh'], $_POST['derniermin']);
@@ -310,7 +316,7 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
 
 
         $etat = calcul_montante_descente($_POST['dernierh'], $_POST['derniermin'], $heureserv, $minuteserv);
-        $tauxnow = calcul_taux_now($_POST['sexe'], $tauxmax, $etat, $_POST['dernierh'], $_POST['derniermin'], $heureserv, $minuteserv);
+        $tauxnow = calcul_taux_now($_POST['sexe'], $tauxmax, $etat, $_POST['dernierh'], $_POST['derniermin'], $heureserv, $minuteserv, $Periode);
         $indicetaux = affiche_phrase($tauxnow);
 
 
@@ -322,7 +328,7 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
         ?>
         <div clas="col-12">
             <div class="row">
-                <div class="col-12 center text"> Votre taux actuel :
+                <div class="col-12 center text paddingtitle"> Votre taux actuel :
                 </div>
             </div>
             <div class="row">
@@ -335,8 +341,7 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
         </div>
         <div class="col-12">
             <div class="row">
-                <div class="offset-2"></div>
-                <div class="col-8 center info">
+                <div class="col-12 center info">
                     <?Php if ($indicetaux == 0) {
                         echo 'Vous êtes sobre vous pouvez conduire en tout sécurité';
                     } else if ($indicetaux == 1) {
@@ -351,15 +356,17 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
                         echo ' Vous êtes complètement «à l\'ouest», avec une forte probabilité de perte de conscience et de danger pour votre vie.';
                     } else if ($indicetaux == 6) {
                         echo ' Vous pouvez tomber dans le coma, danger de mort immédiate.';
+                    } else if ($indicetaux == 7) {
+                        echo ' Votre pourcentage d\'alcooméie dans le sang à dépassé les 6% vous êtes officiellement mort.';
                     } ?>
                 </div>
                 <div class="offset-2"></div>
             </div>
         </div>
-        <div class="col-12 center text">
+        <div class="col-12 text">
             <div class="row bordur">
-                <div class="offset-3"></div>
-                <div class="col-6">
+                <div class="offset-xl-3 offset-lg-3 offset-md-1 offset-0"></div>
+                <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-12">
                     <?php
                     echo 'Vous êtes en débit ';
                     if ($etat == "montant") {
@@ -377,7 +384,7 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
                     } else
 
 
-                        echo  ' était de : <b>' . $tauxmax . ' g/L </b>';
+                        echo  ' était de : <u>' . $tauxmax . ' g/L </u>';
                     echo 'vous ';
 
                     if ($etat == 'montant') {
@@ -388,18 +395,18 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
                     if ($minutemax < 10) {
 
 
-                        echo ' à <b>' . $heuremax . 'h0' . $minutemax . '</b>';
+                        echo ' à <u>' . $heuremax . 'h0' . $minutemax . '</u>';
                     } else {
 
-                        echo ' à <b>' . $heuremax . 'h' . $minutemax . '</b>';
+                        echo ' à <u>' . $heuremax . 'h' . $minutemax . '</u>';
                     } ?>
 
                 </div>
             </div>
             <div class="col-12">
                 <div class="row">
-                    <div class="offset-3"></div>
-                    <div class="col-6">
+                    <div class="offset-xl-1 offset-lg-1 offset-md-1 offset-0 "></div>
+                    <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-12">
                         <?php
                         if ($tauxnow == 0) {
 
@@ -466,9 +473,9 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
                             <form methode="post" action="index.php">
                                 <div class="col-12 bordur">
                                     <div class="row">
-                                        <div class="offset-5"></div>
+                                        <div class="offset-xl-5 offset-lg-5 offset-md-4 offset-sm-4 offset-3"></div>
 
-                                        <div class="col-2 padding">
+                                        <div class="col-6 col-xl-2 col-lg-2 col-md-4 col-sm-5  padding">
                                             <input type="submit" value="Nouveau calcul" class="btncalcul">
                                         </div>
                                     </div>
