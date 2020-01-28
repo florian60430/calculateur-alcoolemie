@@ -287,7 +287,7 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
                 return 4;
             } else if ($tauxnow > 1.5 && $tauxnow <= 2) {
                 return 5;
-            } else if ($tauxnow > 2 && $tauxnow <= 2.5) {
+            } else if ($tauxnow > 2 && $tauxnow <= 13.74) {
                 return 6;
             } else {
                 return 7;
@@ -360,7 +360,7 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
                     } else if ($indicetaux == 6) {
                         echo ' Vous pouvez tomber dans le coma, danger de mort immédiate.';
                     } else if ($indicetaux == 7) {
-                        echo ' Votre pourcentage d\'alcooméie dans le sang à dépassé les 6% vous êtes officiellement mort.';
+                        echo 'Vous avez dépassé le record d\'alcoolémie jamais mesuré à ce jour (13,74 g/L).';
                     } ?>
                 </div>
                 <div class="offset-2"></div>

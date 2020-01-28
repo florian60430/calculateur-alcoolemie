@@ -81,7 +81,7 @@ SELECT{
 font-weight: 700;
 font-size: 17px;
 margin-top: 12.5%;
-margin-bottom: 12.5%;
+margin-bottom: 21.5%;
 }
 .bordur {
 
@@ -102,7 +102,7 @@ input {
 .tauxnow {
 
   text-align: center;
-  font-size: 100px;
+  font-size: 90px;
   font-weight: 700;
 }
 
