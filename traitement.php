@@ -11,9 +11,9 @@
     <link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 575px)" href="traitement_xs.css" /> <!-- Pour ceux qui ont une résolution inférieure à 575px -->
     <link href="https://fonts.googleapis.com/css?family=Questrial&display=swap" rel="stylesheet">
 
-<!-- Ajouter si taux alcool trop haut afficher "vous êtes mort" si le taux est trop haut
+    <!-- Ajouter si taux alcool trop haut afficher "vous êtes mort" si le taux est trop haut
 afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
-<!-- ajouter l'algo perte d'alcool qui commence a la fin de la consommation -->
+    <!-- ajouter l'algo perte d'alcool qui commence a la fin de la consommation -->
 
     <title>PICOLO CALCULATOR</title>
 </head>
@@ -50,313 +50,276 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
     $minuteserv = date('i');
     ?>
     <div class="container">
-        <form method="post" action="insertion.php">
-            <div class="col-12">
-                <div class="row">
-                    <div class="offset-4 "></div>
-                    <div class="col-4 padding d-none d-lg-block">
-                        <input type="button" onClick="bascule('boite');" value="Informations" class="size">
-                    </div>
-                </div>
-            </div>
-        </form>
-        <div name="boite" id="boite" style="visibility: hidden">
-            <script language="Javascript">
-                // le script permet juste d'afficher le formulaire 
-                // quand on click sur ajouter un nouvelle alocool //
-                function bascule(elem) {
-                    etat = document.getElementById(elem).style.visibility;
-                    if (etat == "hidden") {
-                        document.getElementById(elem).style.visibility = "visible";
-                    } else {
-                        document.getElementById(elem).style.visibility = "hidden";
-                    }
-                }
-            </script>
-            <div class="col-12 padding">
-                <div class="row extra_bordur">
-                    <div class="col-3">
-                        <div class="row">
-                            <div class="col-6"> Votre poid</div>
-                            <div class="col-6">
-                                <?php echo $_POST['poid']; ?>kg</div>
-                            <div class="col-6"> Votre sexe </div>
-                            <div class="col-6"> <?php echo $_POST['sexe']; ?></div>
-                            <div class="col-6"> repas ? </div>
-                            <div class="col-6"> <?php echo $_POST['repas']; ?></div>
-                        </div>
-                    </div>
-                    <div class="col-3">
-                        <div class="row">
-                            <div class="col-7"> heure du serveur </div>
-                            <div class="col-5"> <?php echo $heureserv . 'h' . $minuteserv; ?></div>
-                            <div class="col-7">Dosage</div>
-                            <div class="col-5"> <?php echo $dose; ?></div>
-                            <div class="col-7">Nb de verres</div>
-                            <div class="col-5"><?php echo $_POST['nbverres'] ?></div>
-                        </div>
-                    </div>
-
-
-                    <?php
-                    // Fonction qui calcul l'acoolméie pour homme et femme//
-                    function Calcul_Taux_Alcool_Max($dose,  $masse)
-                    {
-                        if ($_POST['sexe'] === 'Homme') {
-
-                            $taux = ($dose) / (0.7 * $masse);
-                            return $taux;
-                        } else {
-
-                            $taux = ($dose) / (0.6 * $masse);
-                            return $taux;
-                        }
-                    }
-
-                    // Fonction qui calcul l'horaire de l'acoolémie maximum de l'utilisateur
-                    function Calcul_Temp_Max_Alcoolémie($manger, $heure, $minute)
-                    {
-                        if ($manger == 'non') {
-
-                            if ($minute <= 30) {
-
-                                $minute = $minute + 30;
-                                $heure = $heure;
-                            } else {
-
-                                $minute = $minute - 30;
-                                $heure = $heure + 1;
-                            }
-                        } else {
-
-                            $minute = $minute;
-                            $heure = $heure + 1;
-                        }
-                        return array($heure, $minute);
-                    }
-
-                    function calcul_taux_now($sexe, $taux, $etat, $hmax, $minmax, $h, $min)
-                    {
-                        if ($h < $hmax) {
-
-                            $lastheure = ($hmax * 60) + $minmax;  // 930
-                            $servheure = (($h + 24) * 60) + $min; // 1484
-                        } else {
-
-                            $lastheure = ($hmax * 60) + $minmax; //1030
-                            $servheure = ($h * 60) + $min; // 1033
-                        }
-
-
-                        if ($etat == 'descente') {
-
-                            if ($sexe == 'Homme') {
-
-                                $rest = $servheure - $lastheure;
-
-
-                                $tauxnow = $taux - 0.0025 * $rest;
-                            } else {
-
-                                $rest =  $servheure - $lastheure; //  389
-
-
-                                $tauxnow = $taux - 0.0015 * $rest;
-                            }
-                        } else {
-
-                            if ($sexe == "Homme") {
-                                $rest =  $servheure - $lastheure;
-
-                                $perte =  0.0025 * $rest;
-                                $heuremax =  ($lastheure + 60);
-                                $tauxnow = $taux * $servheure / $heuremax;
-                            } else {
-
-                                $rest =  $servheure - $lastheure;
-
-                                $perte =  0.0015 * $rest;
-                                $heuremax =  ($lastheure + 60);
-                                $tauxnow = $taux * $servheure / $heuremax;
-                            }
-                        }
-
-                        if ($tauxnow < 0) {
-
-                            return 0;
-                        } else {
-
-                            return $tauxnow;
-                        }
-                    }
-
-
-                    // fonction qui calcule le temps que mettras l'organisme à éliminer l'acool
-                    function Calcul_temps_sobre($taux, $h, $min)
-                    {
-                        $compteur = 0;
-                        $heuresobre = 0;
-                        if ($_POST['sexe'] == 'Homme') {
-                            while ($taux > 0) {
-
-                                $taux = $taux - 0.0025;
-                                $compteur = $compteur + 1;
-                            }
-                        } else {
-                            while ($taux > 0) {
-
-                                $taux = $taux - 0.0015;
-                                $compteur = $compteur + 1;
-                            }
-                        }
-                        while ($compteur > 60) {
-
-                            $compteur = $compteur - 60;
-                            $heuresobre = $heuresobre + 1;
-                        }
-                        $heuresobre = $h + $heuresobre;
-                        $minutesobre = $compteur + $min;
-                        return array($heuresobre, $minutesobre);
-                    }
-
-                    function calcul_heure_seuil_legal($taux, $h, $min)
-                    {
-
-                        $compteur = 0;
-                        $heurelegal = 0;
-
-                        if ($_POST['sexe'] == 'Homme') {
-                            while ($taux > 0.50) {
-
-                                $taux = $taux - 0.0025;
-                                $compteur = $compteur + 1;
-                            }
-                        } else {
-                            while ($taux > 0.50) {
-
-                                $taux = $taux - 0.0015;
-                                $compteur = $compteur + 1;
-                            }
-                        }
-                        while ($compteur > 60) {
-
-                            $compteur = $compteur - 60;
-                            $heurelegal = $heurelegal + 1;
-                        }
-                        $heurelegal = $h + $heurelegal;
-                        $minuteleagal = $compteur + $min;
-                        return array($heurelegal, $minuteleagal);
-                    }
-
-                    function calcul_heure_seuil_legal_jeune($taux, $h, $min)
-                    {
-
-                        $compteur = 0;
-                        $heurelegaljeune = 0;
-
-                        if ($_POST['sexe'] == 'Homme') {
-                            while ($taux > 0.20) {
-
-                                $taux = $taux - 0.0025;
-                                $compteur = $compteur + 1;
-                            }
-                        } else {
-                            while ($taux > 0.20) {
-
-                                $taux = $taux - 0.0015;
-                                $compteur = $compteur + 1;
-                            }
-                        }
-                        while ($compteur > 60) {
-
-                            $compteur = $compteur - 60;
-                            $heurelegaljeune = $heurelegaljeune + 1;
-                        }
-                        $heurelegaljeune = $h + $heurelegaljeune;
-                        $minutelegaljeune = $compteur + $min;
-
-
-                        return array($heurelegaljeune, $minutelegaljeune);
-                    }
-
-
-
-                    function calcul_montante_descente($lasth, $lastm, $hserv, $minserv)
-                    {
-
-                        if ($hserv < $lasth) { //non
-
-                            $lastheure = ($lasth * 60) + $lastm;
-                            $servheure = (($hserv + 24) * 60) + $minserv;
-                        } else {
-
-                            $lastheure = ($lasth * 60) + $lastm; //1030
-                            $servheure = ($hserv * 60) + $minserv; //1033
-                        }
-                        if (($lastheure - $servheure) <= -60) // 
-
-                        {
-
-                            return $etat = 'descente';
-                        } else {
-
-                            return $etat = 'montant';
-                        }
-                    }
-                    function affiche_phrase($tauxnow)
-                    {
-                        if ($tauxnow == 0) {
-                            return 0;
-                        } else if ($tauxnow > 0 && $tauxnow <= 0.25) {
-                            return 1;
-                        } else if ($tauxnow > 0.25 && $tauxnow <= 0.65) {
-                            return 2;
-                        } else if ($tauxnow > 0.65 && $tauxnow <= 1) {
-                            return 3;
-                        } else if ($tauxnow > 1 && $tauxnow <= 1.5) {
-                            return 4;
-                        } else if ($tauxnow > 1.5 && $tauxnow <= 2) {
-                            return 5;
-                        } else {
-                            return 6;
-                        }
-                    }
-                    $tauxmax = Calcul_Taux_Alcool_Max($dose, $_POST['poid']);
-                    $tauxmax = number_format($tauxmax, '2', '.', '');
-                    $newhoraire = Calcul_Temp_Max_Alcoolémie($_POST['repas'], $_POST['dernierh'], $_POST['derniermin']);
-                    $heuremax = $newhoraire[0];
-                    $minutemax = $newhoraire[1];
-                    $horairesobre = Calcul_temps_sobre($tauxmax, $heuremax, $minutemax);
-                    $horairelegal = calcul_heure_seuil_legal($tauxmax, $heuremax, $minutemax);
-                    $horairelegaljeune = calcul_heure_seuil_legal_jeune($tauxmax, $heuremax, $minutemax);
-                    $heuresobre = $horairesobre[0];
-                    $minutesobre = $horairesobre[1];
-
-
-                    $etat = calcul_montante_descente($_POST['dernierh'], $_POST['derniermin'], $heureserv, $minuteserv);
-                    $tauxnow = calcul_taux_now($_POST['sexe'], $tauxmax, $etat, $_POST['dernierh'], $_POST['derniermin'], $heureserv, $minuteserv);
-                    $indicetaux = affiche_phrase($tauxnow);
-
-
-                    $heureConfirmer = intval($horairelegal[0]);
-                    $minuteConfirmer = intval($horairelegal[1]);
-
-                    $heurejeune = $horairelegaljeune[0];
-                    $minutejeune = $horairelegaljeune[1];
-                    ?>
-                    <div class="col-3">
-                        <div class="row">
-                            <div class="col-7">taux acutelle</div>
-                            <div class="col-4"><?php echo $tauxnow . 'g/L' ?></div>
-                            <div class="col-7">taux max</div>
-                            <div class="col-4"><?php echo $tauxmax . 'g/L' ?></div>
-                            <div class="col-7"> heure taux max</div>
-                            <div class="col-4"><?php echo $newhoraire[0] . 'h' . $newhoraire[1]; ?></div>
-                        </div>
-                    </div>
-                </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12"> <?php echo $heureserv . 'h' . $minuteserv; ?></div>
             </div>
         </div>
+
+
+        <?php
+        // Fonction qui calcul l'acoolméie pour homme et femme//
+        function Calcul_Taux_Alcool_Max($dose,  $masse)
+        {
+            if ($_POST['sexe'] === 'Homme') {
+
+                $taux = ($dose) / (0.7 * $masse);
+                return $taux;
+            } else {
+
+                $taux = ($dose) / (0.6 * $masse);
+                return $taux;
+            }
+        }
+
+        // Fonction qui calcul l'horaire de l'acoolémie maximum de l'utilisateur
+        function Calcul_Temp_Max_Alcoolémie($manger, $heure, $minute)
+        {
+            if ($manger == 'non') {
+
+                if ($minute <= 30) {
+
+                    $minute = $minute + 30;
+                    $heure = $heure;
+                } else {
+
+                    $minute = $minute - 30;
+                    $heure = $heure + 1;
+                }
+            } else {
+
+                $minute = $minute;
+                $heure = $heure + 1;
+            }
+            return array($heure, $minute);
+        }
+
+        function calcul_taux_now($sexe, $taux, $etat, $hmax, $minmax, $h, $min)
+        {
+            if ($h < $hmax) {
+
+                $lastheure = ($hmax * 60) + $minmax;  // 930
+                $servheure = (($h + 24) * 60) + $min; // 1484
+            } else {
+
+                $lastheure = ($hmax * 60) + $minmax; //1030
+                $servheure = ($h * 60) + $min; // 1033
+            }
+
+
+            if ($etat == 'descente') {
+
+                if ($sexe == 'Homme') {
+
+                    $rest = $servheure - $lastheure;
+
+
+                    $tauxnow = $taux - 0.0025 * $rest;
+                } else {
+
+                    $rest =  $servheure - $lastheure; //  389
+
+
+                    $tauxnow = $taux - 0.0015 * $rest;
+                }
+            } else {
+
+                if ($sexe == "Homme") {
+                    $rest =  $servheure - $lastheure;
+
+                    $perte =  0.0025 * $rest;
+                    $heuremax =  ($lastheure + 60);
+                    $tauxnow = $taux * $servheure / $heuremax;
+                } else {
+
+                    $rest =  $servheure - $lastheure;
+
+                    $perte =  0.0015 * $rest;
+                    $heuremax =  ($lastheure + 60);
+                    $tauxnow = $taux * $servheure / $heuremax;
+                }
+            }
+
+            if ($tauxnow < 0) {
+
+                return 0;
+            } else {
+
+                return $tauxnow;
+            }
+        }
+
+
+        // fonction qui calcule le temps que mettras l'organisme à éliminer l'acool
+        function Calcul_temps_sobre($taux, $h, $min)
+        {
+            $compteur = 0;
+            $heuresobre = 0;
+            if ($_POST['sexe'] == 'Homme') {
+                while ($taux > 0) {
+
+                    $taux = $taux - 0.0025;
+                    $compteur = $compteur + 1;
+                }
+            } else {
+                while ($taux > 0) {
+
+                    $taux = $taux - 0.0015;
+                    $compteur = $compteur + 1;
+                }
+            }
+            while ($compteur > 60) {
+
+                $compteur = $compteur - 60;
+                $heuresobre = $heuresobre + 1;
+            }
+            $heuresobre = $h + $heuresobre;
+            $minutesobre = $compteur + $min;
+            return array($heuresobre, $minutesobre);
+        }
+
+        function calcul_heure_seuil_legal($taux, $h, $min)
+        {
+
+            $compteur = 0;
+            $heurelegal = 0;
+
+            if ($_POST['sexe'] == 'Homme') {
+                while ($taux > 0.50) {
+
+                    $taux = $taux - 0.0025;
+                    $compteur = $compteur + 1;
+                }
+            } else {
+                while ($taux > 0.50) {
+
+                    $taux = $taux - 0.0015;
+                    $compteur = $compteur + 1;
+                }
+            }
+            while ($compteur > 60) {
+
+                $compteur = $compteur - 60;
+                $heurelegal = $heurelegal + 1;
+            }
+            $heurelegal = $h + $heurelegal;
+            $minuteleagal = $compteur + $min;
+            return array($heurelegal, $minuteleagal);
+        }
+
+        function calcul_heure_seuil_legal_jeune($taux, $h, $min)
+        {
+
+            $compteur = 0;
+            $heurelegaljeune = 0;
+
+            if ($_POST['sexe'] == 'Homme') {
+                while ($taux > 0.20) {
+
+                    $taux = $taux - 0.0025;
+                    $compteur = $compteur + 1;
+                }
+            } else {
+                while ($taux > 0.20) {
+
+                    $taux = $taux - 0.0015;
+                    $compteur = $compteur + 1;
+                }
+            }
+            while ($compteur > 60) {
+
+                $compteur = $compteur - 60;
+                $heurelegaljeune = $heurelegaljeune + 1;
+            }
+            $heurelegaljeune = $h + $heurelegaljeune;
+            $minutelegaljeune = $compteur + $min;
+
+
+            return array($heurelegaljeune, $minutelegaljeune);
+        }
+
+
+
+        function calcul_montante_descente($lasth, $lastm, $hserv, $minserv)
+        {
+
+            if ($hserv < $lasth) { //non
+
+                $lastheure = ($lasth * 60) + $lastm;
+                $servheure = (($hserv + 24) * 60) + $minserv;
+            } else {
+
+                $lastheure = ($lasth * 60) + $lastm; //1030
+                $servheure = ($hserv * 60) + $minserv; //1033
+            }
+            if (($lastheure - $servheure) <= -60) // 
+
+            {
+
+                return $etat = 'descente';
+            } else {
+
+                return $etat = 'montant';
+            }
+        }
+        function affiche_phrase($tauxnow)
+        {
+            if ($tauxnow == 0) {
+                return 0;
+            } else if ($tauxnow > 0 && $tauxnow <= 0.25) {
+                return 1;
+            } else if ($tauxnow > 0.25 && $tauxnow <= 0.65) {
+                return 2;
+            } else if ($tauxnow > 0.65 && $tauxnow <= 1) {
+                return 3;
+            } else if ($tauxnow > 1 && $tauxnow <= 1.5) {
+                return 4;
+            } else if ($tauxnow > 1.5 && $tauxnow <= 2) {
+                return 5;
+            } else {
+                return 6;
+            }
+        }
+// Fonction qui calcule la période durant laquelle l'utilisateur à bus
+        function calculperiode($HeurePremierVerre, $MinutePremierVerre, $HeureDernierVerre, $MinuteDernierVerre)
+        {
+            if ($HeureDernierVerre < $HeurePremierVerre)
+            {
+                $HeureDernierVerre = $HeureDernierVerre + 24;
+            }
+
+            $Periode = (($HeureDernierVerre * 60) + $MinuteDernierVerre) - (($HeurePremierVerre * 60) + $MinutePremierVerre);
+            return $Periode;
+        }
+        
+        // fonction qui calcul le taux d'alcool que l'utilisateur à éléminer pendant sa consomation // 
+        function calculperte(){
+
+
+        }
+        $tauxmax = Calcul_Taux_Alcool_Max($dose, $_POST['poid']);
+        $tauxmax = number_format($tauxmax, '2', '.', '');
+        $newhoraire = Calcul_Temp_Max_Alcoolémie($_POST['repas'], $_POST['dernierh'], $_POST['derniermin']);
+        $heuremax = $newhoraire[0];
+        $minutemax = $newhoraire[1];
+        $horairesobre = Calcul_temps_sobre($tauxmax, $heuremax, $minutemax);
+        $horairelegal = calcul_heure_seuil_legal($tauxmax, $heuremax, $minutemax);
+        $horairelegaljeune = calcul_heure_seuil_legal_jeune($tauxmax, $heuremax, $minutemax);
+        $heuresobre = $horairesobre[0];
+        $minutesobre = $horairesobre[1];
+
+
+        $etat = calcul_montante_descente($_POST['dernierh'], $_POST['derniermin'], $heureserv, $minuteserv);
+        $tauxnow = calcul_taux_now($_POST['sexe'], $tauxmax, $etat, $_POST['dernierh'], $_POST['derniermin'], $heureserv, $minuteserv);
+        $indicetaux = affiche_phrase($tauxnow);
+
+
+        $heureConfirmer = intval($horairelegal[0]);
+        $minuteConfirmer = intval($horairelegal[1]);
+
+        $heurejeune = $horairelegaljeune[0];
+        $minutejeune = $horairelegaljeune[1];
+        ?>
         <div clas="col-12">
             <div class="row">
                 <div class="col-12 center text"> Votre taux actuel :

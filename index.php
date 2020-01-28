@@ -102,7 +102,7 @@
 								<div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 text d-none d-md-block">
 									Heure à laquelle vous avez fini votre premier et dernier verre :
 								</div>
-								<div class="col-sm-12 col-12 d-md-none  d-none d-sm-block text">
+								<div class="col-sm-12 col-12 d-md-none d-none d-sm-block text">
 									Horaires de d&eacute;but et fin de consommation :
 								</div>
 								<div class="offset-xl-2 offset-lg-2 offset-md-0"></div>
