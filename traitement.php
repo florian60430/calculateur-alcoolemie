@@ -8,6 +8,7 @@
 
     <link href="bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet"> <!-- Bootstrap (pour le design) -->
     <link href="traitement.css" rel="stylesheet">
+    <link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 575px)" href="traitement_xs.css" /> <!-- Pour ceux qui ont une résolution inférieure à 575px -->
     <link href="https://fonts.googleapis.com/css?family=Questrial&display=swap" rel="stylesheet">
 
 <!-- Ajouter si taux alcool trop haut afficher "vous êtes mort" si le taux est trop haut
@@ -27,8 +28,7 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
         </div>
 
         <div class="row title2">
-            <div class="offset-4"></div>
-            <div class="col-4">
+            <div class="col-12">
                 D'ALCOOL&Eacute;MIE</div>
         </div>
     </div>
@@ -53,8 +53,8 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
         <form method="post" action="insertion.php">
             <div class="col-12">
                 <div class="row">
-                    <div class="offset-4"></div>
-                    <div class="col-4 padding">
+                    <div class="offset-4 "></div>
+                    <div class="col-4 padding d-none d-lg-block">
                         <input type="button" onClick="bascule('boite');" value="Informations" class="size">
                     </div>
                 </div>

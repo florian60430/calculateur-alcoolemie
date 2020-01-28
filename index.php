@@ -86,7 +86,7 @@
 								<div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12 text">
 									Avez-vous mang&eacute; ?
 								</div>
-								<div class="col-xl-1 col-lg-1 col-md-2 col-sm-2 col-4 padding">
+								<div class="col-xl-1 col-lg-1 col-md-2 col-sm-2 col-4">
 									<!-- Select du repas -->
 									<SELECT name="repas" required>
 										<OPTION value=""> -- </OPTION>
@@ -134,7 +134,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-12 padding text"> Dernier verre </div>
+								<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-12 padding marginlft5 text"> Dernier verre </div>
 
 								<div class="col-xl-2 col-lg-2 col-md-3 col-sm-5 col-6 padding paddingheure">
 									<div class="row">
