@@ -10,7 +10,7 @@
     <link href="traitement.css" rel="stylesheet">
     <link rel="stylesheet" media="screen and (min-width: 767px) and (max-width: 992px) " href="traitement_md.css" /> <!-- Pour ceux qui ont une résolution inférieure à 992px -->
     <link rel="stylesheet" media="screen and (min-width: 575px) and (max-width: 767px)" href="traitement_sm.css" /> <!-- Pour ceux qui ont une résolution inférieure à 767px -->
-    <link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 575px)" href="traitement_xs.css" /> <!-- Pour ceux qui ont une résolution inférieure à 575px -->
+    <link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 575px) and (min-height: 569px) and (max-height: 735px)" href="traitement_xs.css" /> <!-- Pour ceux qui ont une résolution inférieure à 575px -->
     <link href="https://fonts.googleapis.com/css?family=Questrial&display=swap" rel="stylesheet">
 
     <!-- Ajouter si taux alcool trop haut afficher "vous êtes mort" si le taux est trop haut
@@ -54,7 +54,12 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
     <div class="container">
         <div class="col-12">
             <div class="row">
-                <div class="col-12"> <?php echo $heureserv . 'h' . $minuteserv; ?></div>
+                <div class="offset-xl-5 offset-lg-5 offset-md-4 offset-sm-4 offset-2"></div>
+                <div class="col-8 col-xl-2 col-lg-2 col-md-4 col-sm-5 btncalcul padding">
+                    <form methode="post" action="index.php">
+                        <input type="submit" value="Nouveau calcul">
+                    </form>
+                </div>
             </div>
         </div>
 
@@ -117,25 +122,24 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
 
 
                     $tauxnow = $taux - 0.0025 * $rest;
-                    $tauxnow = $taux - 0.0025*$Periode;
+                    $tauxnow = $taux - 0.0025 * $Periode;
                 } else {
 
                     $rest =  $servheure - $lastheure; //  389
 
 
                     $tauxnow = $taux - 0.0015 * $rest;
-                    $tauxnow = $taux - 0.0015*$Periode;
+                    $tauxnow = $taux - 0.0015 * $Periode;
                 }
             } else {
 
                 if ($sexe == "Homme") {
-                    
+
                     $rest =  $servheure - $lastheure;
                     $perte =  0.0025 * $rest;
                     $heuremax =  ($lastheure + 60);
                     $tauxnow = $taux * $servheure / $heuremax;
-                    $tauxnow = $taux - 0.0025*$Periode;
-                
+                    $tauxnow = $taux - 0.0025 * $Periode;
                 } else {
 
                     $rest =  $servheure - $lastheure;
@@ -143,7 +147,7 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
                     $perte =  0.0015 * $rest;
                     $heuremax =  ($lastheure + 60);
                     $tauxnow = $taux * $servheure / $heuremax;
-                    $tauxnow = $taux - 0.0015*$Periode;
+                    $tauxnow = $taux - 0.0015 * $Periode;
                 }
             }
 
@@ -283,24 +287,23 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
                 return 4;
             } else if ($tauxnow > 1.5 && $tauxnow <= 2) {
                 return 5;
-            } else if ($tauxnow >2 && $tauxnow <= 2.5) {
+            } else if ($tauxnow > 2 && $tauxnow <= 2.5) {
                 return 6;
-            }else {
+            } else {
                 return 7;
             }
         }
-// Fonction qui calcule la période durant laquelle l'utilisateur à bus
+        // Fonction qui calcule la période durant laquelle l'utilisateur à bus
         function calculperiode($HeurePremierVerre, $MinutePremierVerre, $HeureDernierVerre, $MinuteDernierVerre)
         {
-            if ($HeureDernierVerre < $HeurePremierVerre)
-            {
+            if ($HeureDernierVerre < $HeurePremierVerre) {
                 $HeureDernierVerre = $HeureDernierVerre + 24;
             }
 
             $Periode = (($HeureDernierVerre * 60) + $MinuteDernierVerre) - (($HeurePremierVerre * 60) + $MinutePremierVerre);
             return $Periode;
         }
-        
+
         // fonction qui calcul le taux d'alcool que l'utilisateur à éléminer pendant sa consomation // 
         $Periode = calculperiode($_POST['premierh'], $_POST['premiermin'], $_POST['dernierh'], $_POST['derniermin']);
         $tauxmax = Calcul_Taux_Alcool_Max($dose, $_POST['poid']);
@@ -470,40 +473,30 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
                                     } ?></b>
                                     </div>
                             </div>
-                            <form methode="post" action="index.php">
-                                <div class="col-12 bordur">
-                                    <div class="row">
-                                        <div class="offset-xl-5 offset-lg-5 offset-md-4 offset-sm-4 offset-3"></div>
-
-                                        <div class="col-6 col-xl-2 col-lg-2 col-md-4 col-sm-5  padding">
-                                            <input type="submit" value="Nouveau calcul" class="btncalcul">
-                                        </div>
+                            <div class="col-12 extra_padding text_footer center">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p>
+                                            Le foie &eacute;limine 95% de l'alcool dans le corps à raison de 0.10 à 0.20 g/l pour un homme et
+                                            0.085 à 0.10 g/l pour une femme pour nos calculs nous avons utilisé 0.15g/L pour un homme et
+                                            0.09 g/L pour une femme ou genre indéfinie les calculs ne prennent pas en compte les 5% restants
+                                            &eacute;liminer par l'air expiré et les urines
+                                        </p>
                                     </div>
-                                </div>
-                                <div class="col-12 extra_padding text_footer center">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <p>
-                                                Le foie &eacute;limine 95% de l'alcool dans le corps à raison de 0.10 à 0.20 g/l pour un homme et
-                                                0.085 à 0.10 g/l pour une femme pour nos calculs nous avons utilisé 0.15g/L pour un homme et
-                                                0.09 g/L pour une femme ou genre indéfinie les calculs ne prennent pas en compte les 5% restants
-                                                &eacute;liminer par l'air expiré et les urines
-                                            </p>
-                                        </div>
-                                        <div class="col-12 padding">
-                                            <p>
-                                                apr&egrave;s ingestion d'un verre d'alcool le taux maximum est atteint 1h apr&egrave;s et 30 min si on est à jeun
-                                            </p>
-                                        </div>
-                                    </div class="col-12 center padding">
-                                    <p> - une dose de bar correspond à 0.10g d'alcool pur dans un verre</p>
-                                    <p>- une dose maison correspond à 0.12.5g d'alcool pur dans un verre</p>
-                                    <p>- une dose forte correspond à 0.15g d'acool pur dans un verre</p>
-
                                     <div class="col-12 padding">
-                                        <p>l'intervalle d'incertitude est de {+5% et -0.5%} c'est-à-dire que les r&eacute;sultats seront plus souvent au-dessus qu'en dessous de la r&eacute;alit&eacute;
+                                        <p>
+                                            apr&egrave;s ingestion d'un verre d'alcool le taux maximum est atteint 1h apr&egrave;s et 30 min si on est à jeun
+                                        </p>
                                     </div>
+                                </div class="col-12 center padding">
+                                <p> - une dose de bar correspond à 0.10g d'alcool pur dans un verre</p>
+                                <p>- une dose maison correspond à 0.12.5g d'alcool pur dans un verre</p>
+                                <p>- une dose forte correspond à 0.15g d'acool pur dans un verre</p>
+
+                                <div class="col-12 padding">
+                                    <p>l'intervalle d'incertitude est de {+5% et -0.5%} c'est-à-dire que les r&eacute;sultats seront plus souvent au-dessus qu'en dessous de la r&eacute;alit&eacute;
                                 </div>
+                            </div>
                     </div>
                     </form>
                 </div>
