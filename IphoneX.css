@@ -4,38 +4,38 @@ input, SELECT {
     border: 1px solid #b4b4b4;
     color: #464646;
     margin-left: -18px;
-
-}
-
-.padding{
-
-margin-top: 3.5%;
-}
-
-SELECT{
-
+  
+  }
+  
+  .padding{
+  
+  margin-top: 4.5%;
+  }
+  
+  SELECT{
+  
   font-size: 20px;
   width: 150%;
   height: 110%;
-}
-
-input {
-
-
+  }
+  
+  input {
+  
+  
   text-align : center;
   font-size : 20px;
   width: 150%;
   height: 110%;
-}
-
-.text{    
-
+  }
+  
+  .text{    
+  
   font-size: 20px;
   margin-left: -6%;
   }
-
-footer {
-
+  
+  footer {
+  
   background-color:black;
   padding-top: 5px;
   padding-bottom: 10px;
@@ -43,15 +43,15 @@ footer {
   bottom: 0;
   width: 105%;
   height: 6%;
-}
-.marginlft5{
-
+  }
+  .marginlft5{
+  
   margin-left: -0px;
-
-}
-
-button {
-
+  
+  }
+  
+  button {
+  
   text-align: center;
   background : #377f6f; 
   color : white; 
@@ -61,77 +61,78 @@ button {
   height: 120%;
   margin-left: 15%;
   margin-top: 5%;
-}
-
-.marginrepas
-{
-
+  }
+  
+  .marginrepas
+  {
+  
     margin-top: 1.5%;
-}
-
-.title {
-
+  }
+  
+  .title {
+  
     text-align: center;
     font-size: 28px;
     color: white;
     font-weight: 700;
     }
     
-.title2 {
-
+  .title2 {
+  
     text-align: center;
     font-size: 28px;
     color: white;
     margin-top: -3.5%;
     font-weight: 700;
-}
-
-.paddingfooter{
-
+  }
+  
+  .paddingfooter{
+  
   margin-top : 37.5%;
-}
-
-.marginlft2 {
-
+  }
+  
+  .marginlft2 {
+  
   margin-left: 0%;
-}
-
-.marginlft{
-
+  }
+  
+  .marginlft{
+  
   margin-left: 0%;
-}
-
-.marginlft3{
-
+  }
+  
+  .marginlft3{
+  
     margin-left: -7%;
-}
-
-.marginlft4{
-
-margin-left: -10%;
-}
-
-.marginright{
-
+  }
+  
+  .marginlft4{
+  
+  margin-left: -10%;
+  }
+  
+  .marginright{
+  
   margin-left: 50px;
-}
-
-.paddingheure{
-
+  }
+  
+  .paddingheure{
+  
   margin-top: 2%;
-}
-
-.footertext1{
-
+  }
+  
+  .footertext1{
+  
   font-size: 10px;
   color: #b3b3b3;
   text-align: center;
   margin-top: 0%;
-
-}
-
-.marginlft5{
-
+  
+  }
+  
+  .marginlft5{
+  
   margin-left: -15px;
-
-}
+  
+  }
+  

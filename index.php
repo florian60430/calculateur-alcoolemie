@@ -15,9 +15,9 @@
 	<link rel="stylesheet" media="screen and (min-width: 767px) and (max-width: 992px) " href="ecran_md.css" /> <!-- Pour ceux qui ont une résolution inférieure à 992px -->
 	<link rel="stylesheet" media="screen and (min-width: 575px) and (max-width: 767px)" href="ecran_sm.css" /> <!-- Pour ceux qui ont une résolution inférieure à 767px -->
 	<link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 575px)" href="ecran_xs.css" /> <!-- Pour ceux qui ont une résolution inférieure à 575px -->
-	<link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 575px) and (min-height: 0px) and (max-height: 736px)" href="ecran_xxs.css" /> <!-- Pour ceux qui ont une résolution inférieure à 575px -->
-	<link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 575px) and (min-height: 736px) and (max-height: 915px)" href="IphoneX.css" /> <!-- Pour ceux qui ont une résolution inférieure à 575px -->
-
+	<link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 575px) and (min-height: 0px) and (max-height: 641px)" href="ecran_xxs.css" /> <!-- Pour ceux qui ont une résolution inférieure à 575px -->
+	<link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 575px) and (min-height: 641px) and (max-height: 740px)" href="Iphone6_7_8.css" /> <!-- Pour ceux qui ont une résolution inférieure à 575px -->
+	<link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 575px) and (min-height: 740px) and (max-height: 813px)" href="IphoneX.css" /> <!-- Pour ceux qui ont une résolution inférieure à 575px -->
 
 
 
