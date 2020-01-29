@@ -11,30 +11,27 @@
     <link rel="stylesheet" media="screen and (min-width: 767px) and (max-width: 992px) " href="traitement_md.css" /> <!-- Pour ceux qui ont une résolution inférieure à 992px -->
     <link rel="stylesheet" media="screen and (min-width: 575px) and (max-width: 767px)" href="traitement_sm.css" /> <!-- Pour ceux qui ont une résolution inférieure à 767px -->
     <link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 575px) and (min-height: 569px) and (max-height: 735px)" href="traitement_xs.css" /> <!-- Pour ceux qui ont une résolution inférieure à 575px -->
+    <link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 575px) and (min-height: 735px) and (max-height: 811px)" href="traitement_Iphone8.css" />
     <link href="https://fonts.googleapis.com/css?family=Questrial&display=swap" rel="stylesheet">
-
-    <!-- Ajouter si taux alcool trop haut afficher "vous êtes mort" si le taux est trop haut
-afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
-    <!-- ajouter l'algo perte d'alcool qui commence a la fin de la consommation -->
 
     <title>PICOLO CALCULATOR</title>
 </head>
 
 <body>
-    <div class="col-12 font">
-        <!-- Faire la fonction pour premier verre /  denrier verrre -->
-        <div class="row title">
-            <div class="col-12">
-                SUPER CALCULATEUR
+    <header>
+        <div class="col-12 font">
+            <div class="row title">
+                <div class="col-12">
+                    SUPER CALCULATEUR
+                </div>
+            </div>
+
+            <div class="row title2">
+                <div class="col-12">
+                    D'ALCOOL&Eacute;MIE</div>
             </div>
         </div>
-
-        <div class="row title2">
-            <div class="col-12">
-                D'ALCOOL&Eacute;MIE</div>
-        </div>
-    </div>
-
+    </header>
     <?php
 
     $premierverre = $_POST['premierh'] . $_POST['derniermin'] . '00';
@@ -383,11 +380,11 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
                     echo ' votre taux maximum d\'alcolémie dans le sang';
 
                     if ($etat == 'montant') {
-                        echo  ' sera de : <u>' . $tauxmax . ' g/L </u>';
+                        echo  ' sera de : <b>' . $tauxmax . ' g/L </b>';
                     } else
 
 
-                        echo  ' était de : <u>' . $tauxmax . ' g/L </u>';
+                        echo  ' était de : <b>' . $tauxmax . ' g/L </b>';
                     echo 'vous ';
 
                     if ($etat == 'montant') {
@@ -398,10 +395,10 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
                     if ($minutemax < 10) {
 
 
-                        echo ' à <u>' . $heuremax . 'h0' . $minutemax . '</u>';
+                        echo ' à <b>' . $heuremax . 'h0' . $minutemax . '</b>';
                     } else {
 
-                        echo ' à <u>' . $heuremax . 'h' . $minutemax . '</u>';
+                        echo ' à <b>' . $heuremax . 'h' . $minutemax . '</b>';
                     } ?>
 
                 </div>
@@ -425,15 +422,15 @@ afiicher vous serez sobre dans : "nb d'heure" au lieu de l'horaire direct-->
 
                                 if ($minutesobre < 10) {
 
-                                    echo '<div> Vous serrez sobre demain à <b>' . $heuresobre . "h0" . $minutesobre . "</b></div>";
+                                    echo '<div class="center"> Vous serrez sobre demain à <b>' . $heuresobre . "h0" . $minutesobre . "</b></div>";
                                 } else {
 
-                                    echo '<div> Vous serrez sobre demain à <b>' . $heuresobre . "h" . $minutesobre . "</b></div>";
+                                    echo '<div class="center"> Vous serrez sobre demain à <b>' . $heuresobre . "h" . $minutesobre . "</b></div>";
                                 }
                             } else {
 
 
-                                echo "<div> vous serez sobre à <b>" . $heuresobre . 'h' . $minutesobre . '</b></div>';
+                                echo "<div class='center'> vous serez sobre à<b>" . $heuresobre . 'h' . $minutesobre . '</b></div>';
                             }
                         }
                         ?>

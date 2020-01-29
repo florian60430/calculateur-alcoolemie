@@ -126,8 +126,11 @@
 											<SELECT name="premiermin" required>
 												<OPTION value="">min</OPTION>
 
-												<?php for ($i = 0; $i < 60; $i++) {
+												<?php
+												$i = 0;
+												while ($i <= 55) {
 													echo "<OPTION value=" . $i . "> " . $i . "min</OPTION>";
+													$i = $i + 15;
 												} ?>
 
 											</SELECT>
@@ -154,8 +157,11 @@
 											<SELECT name="derniermin" required>
 												<OPTION value="">min</OPTION>
 
-												<?php for ($i = 0; $i < 60; $i++) {
+												<?php
+												$i = 0;
+												while ($i <= 55) {
 													echo "<OPTION value=" . $i . "> " . $i . "min</OPTION>";
+													$i = $i + 15;
 												} ?>
 
 											</SELECT>
