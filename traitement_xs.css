@@ -1,12 +1,12 @@
 .text{
 
-  font-size: 16px;
+  font-size: 15px;
 }
 
 u{
 
   font-weight: 700;
-  font-size: 20px;
+  font-size: 15px;
 
 
 }
@@ -62,7 +62,7 @@ font-weight: 700;
 body {
 
   font-family: 'Questrial', sans-serif;
-  background-color:#d8d8d8 ;
+  background-color: white;
 }
 
 
@@ -146,6 +146,8 @@ margin-top: 3%;
 .rouge{
 
   color: red;
+  font-size: 14px;
+  font-weight: 700;
 }
 
 .green{
@@ -214,4 +216,9 @@ footer {
 margin-top: 12.5%;
 }
 
-  
+.infosobre{
+
+  text-align: left;
+  margin-top: 20%;
+
+}
