@@ -12,6 +12,8 @@
     <link rel="stylesheet" media="screen and (min-width: 575px) and (max-width: 767px)" href="traitement_sm.css" /> <!-- Pour ceux qui ont une résolution inférieure à 767px -->
     <link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 575px) and (min-height: 569px) and (max-height: 735px)" href="traitement_xs.css" /> <!-- Pour ceux qui ont une résolution inférieure à 575px -->
     <link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 575px) and (min-height: 735px) and (max-height: 811px)" href="traitement_Iphone8.css" />
+    <link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 575px) and (min-height: 811px) and (max-height: 900px)" href="traitement_IphoneX.css" />
+    <link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 575px) and (min-height: 0px) and (max-height: 570px)" href="traitement_Iphone5.css" />
     <link href="https://fonts.googleapis.com/css?family=Questrial&display=swap" rel="stylesheet">
 
     <title>PICOLO CALCULATOR</title>
@@ -33,7 +35,6 @@
         </div>
     </header>
     <?php
-
     $premierverre = $_POST['premierh'] . $_POST['derniermin'] . '00';
     $dernierverre = $_POST['dernierh'] . $_POST['derniermin'] . '00';
     $quantite = intval($_POST['nbverres']);
@@ -47,7 +48,7 @@
     $localtime = localtime();
     $heureserv =  date('h');
     $minuteserv = date('i');
-    ?>
+    echo $heureserv . 'h' . $minuteserv; ?>
     <div class="container">
         <div class="col-12">
             <div class="row">
@@ -67,7 +68,7 @@
         {
             if ($_POST['sexe'] === 'Homme') {
 
-                $taux = ($dose) / (0.7 * $masse);
+                $taux = ($dose) / (0.7 * $masse); // soustraire la perte dans un autre fonciton
                 return $taux;
             } else {
 
@@ -98,7 +99,7 @@
             return array($heure, $minute);
         }
 
-        function calcul_taux_now($sexe, $taux, $etat, $hmax, $minmax, $h, $min, $Periode)
+        function calcul_taux_now($sexe, $taux, $etat, $hmax, $minmax, $h, $min)
         {
             if ($h < $hmax) {
 
@@ -115,18 +116,14 @@
 
                 if ($sexe == 'Homme') {
 
-                    $rest = $servheure - $lastheure;
-
-
+                    $rest = $servheure - $lastheure; //pb élimine 0.20g en l'espace de 15min ?
                     $tauxnow = $taux - 0.0025 * $rest;
-                    $tauxnow = $taux - 0.0025 * $Periode;
                 } else {
 
                     $rest =  $servheure - $lastheure; //  389
 
 
                     $tauxnow = $taux - 0.0015 * $rest;
-                    $tauxnow = $taux - 0.0015 * $Periode;
                 }
             } else {
 
@@ -136,7 +133,6 @@
                     $perte =  0.0025 * $rest;
                     $heuremax =  ($lastheure + 60);
                     $tauxnow = $taux * $servheure / $heuremax;
-                    $tauxnow = $taux - 0.0025 * $Periode;
                 } else {
 
                     $rest =  $servheure - $lastheure;
@@ -144,7 +140,6 @@
                     $perte =  0.0015 * $rest;
                     $heuremax =  ($lastheure + 60);
                     $tauxnow = $taux * $servheure / $heuremax;
-                    $tauxnow = $taux - 0.0015 * $Periode;
                 }
             }
 
@@ -301,6 +296,11 @@
             return $Periode;
         }
 
+
+        function calculperte()
+        {
+        }
+
         // fonction qui calcul le taux d'alcool que l'utilisateur à éléminer pendant sa consomation // 
         $Periode = calculperiode($_POST['premierh'], $_POST['premiermin'], $_POST['dernierh'], $_POST['derniermin']);
         $tauxmax = Calcul_Taux_Alcool_Max($dose, $_POST['poid']);
@@ -316,7 +316,7 @@
 
 
         $etat = calcul_montante_descente($_POST['dernierh'], $_POST['derniermin'], $heureserv, $minuteserv);
-        $tauxnow = calcul_taux_now($_POST['sexe'], $tauxmax, $etat, $_POST['dernierh'], $_POST['derniermin'], $heureserv, $minuteserv, $Periode);
+        $tauxnow = calcul_taux_now($_POST['sexe'], $tauxmax, $etat, $_POST['dernierh'], $_POST['derniermin'], $heureserv, $minuteserv);
         $indicetaux = affiche_phrase($tauxnow);
 
 
@@ -326,6 +326,7 @@
         $heurejeune = $horairelegaljeune[0];
         $minutejeune = $horairelegaljeune[1];
         ?>
+
         <div clas="col-12">
             <div class="row">
                 <div class="col-12 center text paddingtitle"> Votre taux actuel :
@@ -363,152 +364,210 @@
                 <div class="offset-2"></div>
             </div>
         </div>
-        <div class="col-12 text">
-            <div class="row bordur">
-                <div class="offset-xl-3 offset-lg-3 offset-md-1 offset-0"></div>
-                <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-12 center">
-                    <?php
-                    echo 'Vous êtes en débit ';
-                    if ($etat == "montant") {
+        <div class="d-none d-sm-block">
+            <div class="col-12 text ">
+                <div class="row bordur">
+                    <div class="offset-xl-3 offset-lg-3 offset-md-1 offset-0"></div>
+                    <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-12 center">
+                        <?php
+                        echo 'Vous êtes en débit ';
+                        if ($etat == "montant") {
 
-                        echo 'montant';
-                    } else {
-
-                        echo 'descendant';
-                    }
-
-                    echo ' votre taux maximum d\'alcolémie dans le sang';
-
-                    if ($etat == 'montant') {
-                        echo  ' sera de : <b>' . $tauxmax . ' g/L </b>';
-                    } else
-
-
-                        echo  ' était de : <b>' . $tauxmax . ' g/L </b>';
-                    echo 'vous ';
-
-                    if ($etat == 'montant') {
-                        echo  ' l\'atteindrez';
-                    } else {
-                        echo  ' l\'avez atteind';
-                    }
-                    if ($minutemax < 10) {
-
-
-                        echo ' à <b>' . $heuremax . 'h0' . $minutemax . '</b>';
-                    } else {
-
-                        echo ' à <b>' . $heuremax . 'h' . $minutemax . '</b>';
-                    } ?>
-                    <?php
-                    if ($tauxnow == 0) {
-
-                        echo 'vous êtes sobre';
-                    } else {
-                        if ($minutesobre >= 60) {
-
-                            $minutesobre = $minutesobre - 60;
-                            $heuresobre = $heuresobre + 1;
-                        }
-                        if ($heuresobre >= 24) {
-                            $heuresobre = $heuresobre - 24;
-
-                            if ($minutesobre < 10) {
-
-                                echo 'Vous serrez sobre demain à <b>' . $heuresobre . "h0" . $minutesobre . "</b>";
-                            } else {
-
-                                echo 'Vous serrez sobre demain à <b>' . $heuresobre . "h" . $minutesobre . "</b>";
-                            }
+                            echo 'montant';
                         } else {
 
-
-                            echo "vous serez sobre à <b>" . $heuresobre . 'h' . $minutesobre . '</b>';
+                            echo 'descendant';
                         }
-                    }
-                    ?>
-                </div>
-            </div>
-            <div class="col-12">
-                <div class="row">
-                    <div class="col-12 bordur infosobre">
-                        <?php if ($tauxnow < 0.50) {
-                            echo '<div class="green"> <b>vous êtes en dessous du seuil légal des 0.50 g/L pour un conducteur confirmé vous pouvez donc conduire</b> </div>';
-                        } else { ?>
-                            <div class="rouge">Pour un conducteur confirmer vous passerez le seuil l&eacute;gal des 0.50g/L à
-                                <?php
 
-                                if ($minuteConfirmer < 10) {
+                        echo ' votre taux maximum d\'alcolémie dans le sang';
 
-                                    echo '<u>' . $heureConfirmer . 'h0' . $minuteConfirmer . '</u>';
+                        if ($etat == 'montant') {
+                            echo  ' sera de : <b>' . $tauxmax . ' g/L </b>';
+                        } else
+
+
+                            echo  ' était de : <b>' . $tauxmax . ' g/L </b>';
+                        echo 'vous ';
+
+                        if ($etat == 'montant') {
+                            echo  ' l\'atteindrez';
+                        } else {
+                            echo  ' l\'avez atteind';
+                        }
+                        if ($minutemax < 10) {
+
+
+                            echo ' à <b>' . $heuremax . 'h0' . $minutemax . '</b>';
+                        } else {
+
+                            echo ' à <b>' . $heuremax . 'h' . $minutemax . '</b>';
+                        } ?>
+                        <?php
+                        if ($tauxnow == 0) {
+
+                            echo 'vous êtes sobre';
+                        } else {
+                            if ($minutesobre >= 60) {
+
+                                $minutesobre = $minutesobre - 60;
+                                $heuresobre = $heuresobre + 1;
+                            }
+                            if ($heuresobre >= 24 && $heuresobre <= 48) {
+                                $heuresobre = $heuresobre - 24;
+
+                                if ($minutesobre < 10) {
+
+                                    echo 'Vous serrez sobre demain à <b>' . $heuresobre . "h0" . $minutesobre . ".</b>";
                                 } else {
-                                    echo '<u>' . $heureConfirmer . 'h' . $minuteConfirmer . '</u>';
+
+                                    echo 'Vous serrez sobre demain à <b>' . $heuresobre . "h" . $minutesobre . ".</b>";
                                 }
-                            } ?></b></div>
-                            <?php if ($tauxnow < 0.20) {
-                                echo '<div class="green"> <b>vous êtes en dessous du seuil légal des 0.20 g/L jeune conducteur vous pouvez donc conduire </b></div>';
-                            } else { ?>
+                            } else if ($heuresobre < 24) {
 
-                                <div class="rouge"> Pour un jeune conducteur vous passerez le seuil l&eacute;gal des 0.20g/L à
-                                    <?php if ($minutejeune < 10) {
 
-                                        echo '<u>' . $heurejeune . 'h0' . $minutejeune . '</u>';
-                                    } else {
-                                        echo '<u>' . $heurejeune . 'h' . $minutejeune . '</u>';
-                                    }
-                                } ?></b>
-                                </div>
-                    </div>
-                    <div class="col-12 extra_padding text_footer center">
-                        <div class="row">
-                            <div class="col-12">
-                                <p>
-                                    Le foie &eacute;limine 95% de l'alcool dans le corps à raison de 0.10 à 0.20 g/l pour un homme et
-                                    0.085 à 0.10 g/l pour une femme pour nos calculs nous avons utilisé 0.15g/L pour un homme et
-                                    0.09 g/L pour une femme ou genre indéfinie les calculs ne prennent pas en compte les 5% restants
-                                    &eacute;liminer par l'air expiré et les urines
-                                </p>
-                            </div>
-                            <div class="col-12 padding">
-                                <p>
-                                    apr&egrave;s ingestion d'un verre d'alcool le taux maximum est atteint 1h apr&egrave;s et 30 min si on est à jeun
-                                </p>
-                            </div>
-                        </div class="col-12 center padding">
-                        <p> - une dose de bar correspond à 0.10g d'alcool pur dans un verre</p>
-                        <p>- une dose maison correspond à 0.12.5g d'alcool pur dans un verre</p>
-                        <p>- une dose forte correspond à 0.15g d'acool pur dans un verre</p>
-
-                        <div class="col-12 padding">
-                            <p>l'intervalle d'incertitude est de {+5% et -0.5%} c'est-à-dire que les r&eacute;sultats seront plus souvent au-dessus qu'en dessous de la r&eacute;alit&eacute;
-                        </div>
+                                echo "vous serez sobre à <b>" . $heuresobre . 'h' . $minutesobre . '</b>';
+                            } else if ($heuresobre > 48) {
+                                echo "vous serez sobre dans <b>" . $heuresobre . ' heures et ' . $minutesobre . ' minutes. </b>';
+                            }
+                        }
+                        ?>
                     </div>
                 </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    </div>
-    <footer class="row">
-        <div class="col-12 footertext1">
-            Copyright © 2020 Amiens - France. Inc. Tous droits réservés.
-        </div>
-        <div class="offset-3"></div>
-        <div class="col-2 footertext2">CALCULATEUR</div>
-        <div class="col-2 footertext2">CONTRAT D'UTILISATION</div>
-        <div class="col-2 footertext2">MENTIONS L&Eacute;GALES</div>
-        <div class="offset-1"></div>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12 bordur infosobre">
+                            <?php if ($tauxnow < 0.50) {
+                                echo '<div class="green center"> <b>vous êtes en dessous du seuil légal des 0.50 g/L pour un conducteur confirmé vous pouvez donc conduire</b> </div>';
+                            } else {
 
-        </div>
-        <div class="col-12 footerline"></div>
-        <div class="col-12">
-            <div class="row">
-                <div class="offset-4"></div>
-                <div class="col-2 footertext3">Developped and designed by :</div>
-                <div class="col-2 footertext4">Florian Wantelez, Mattei Freisi</div>
-            </div>
-        </div>
-        </div>
+                                if ($minuteConfirmer >= 60) {
+
+                                    $minuteConfirmer = $minuteConfirmer - 60;
+                                    $heureConfirmer = $heureConfirmer + 1;
+                                }
+
+                                if ($heureConfirmer >= 24 && $heureConfirmer <= 48) {
+
+                                    $heureConfirmer = $heureConfirmer - 24;
+                            ?>
+
+                                    <div class="rouge">Pour un conducteur confirmé vous passerez le seuil l&eacute;gal des 0.50g/L demain à
+                                        <?php
+
+                                        if ($minuteConfirmer < 10) {
+
+                                            echo '<u>' . $heureConfirmer . 'h0' . $minuteConfirmer . '</u>';
+                                        } else {
+                                            echo '<u>' . $heureConfirmer . 'h' . $minuteConfirmer . '</u>';
+                                        }
+                                    } else if ($heureConfirmer < 24) { ?>
+                                        <div class="rouge">Pour un conducteur confirmé vous passerez le seuil l&eacute;gal des 0.50g/L à
+                                            <?php
+                                            if ($minuteConfirmer < 10) {
+
+                                                echo '<u>' . $heureConfirmer . 'h0' . $minuteConfirmer . '</u>';
+                                            } else {
+                                                echo '<u>' . $heureConfirmer . 'h' . $minuteConfirmer . '</u>';
+                                            }
+                                        } else if ($heureConfirmer > 48) { ?>
+
+                                            <div class="rouge">Pour un conducteur confirmé vous passerez le seuil l&eacute;gal des 0.50g/L dans
+                                        <?php echo '<u>' . $heureConfirmer . 'heures </u>et <u>' . $minuteConfirmer . 'minutes </u>.';
+                                        }
+                                    }
+                                        ?></b>
+                                        <?php if ($tauxnow < 0.20) {
+                                            echo '<div class="green center"> <b>vous êtes en dessous du seuil légal des 0.20 g/L jeune conducteur vous pouvez donc conduire </b></div>';
+                                        } else {
+
+                                            if ($minutejeune >= 60) {
+
+                                                $minutejeune = $minutejeune - 60;
+                                                $heurejeune = $heurejeune + 1;
+                                            }
+
+                                            if ($heurejeune >= 24 && $heurejeune <= 48) {
+
+                                                $heurejeune = $heurejeune - 24;
+
+                                        ?>
+                                                <div class="rouge"> Pour un jeune conducteur vous passerez le seuil l&eacute;gal des 0.20g/L <b>demain</b> à
+                                                    <?php if ($minutejeune < 10) {
+
+                                                        echo '<u>' . $heurejeune . 'h0' . $minutejeune . '</u>';
+                                                    } else {
+                                                        echo '<u>' . $heurejeune . 'h' . $minutejeune . '</u>';
+                                                    }
+                                                } else if ($heurejeune < 24) {
+                                                    ?>
+                                                    <div class="rouge"> Pour un jeune conducteur vous passerez le seuil l&eacute;gal des 0.20g/L à
+                                                        <?php if ($minutejeune < 10) {
+
+                                                            echo '<u>' . $heurejeune . 'h0' . $minutejeune . '</u>';
+                                                        } else {
+                                                            echo '<u>' . $heurejeune . 'h' . $minutejeune . '</u>';
+                                                        }
+                                                    } else if ($heurejeune > 48) { ?>
+
+                                                        <div class="rouge"> Pour un jeune conducteur vous passerez le seuil l&eacute;gal des 0.20g/L dans
+                                                    <?php echo '<u>' . $heurejeune . 'heures </u>et <u>' . $minutejeune . '</u> minutes';
+                                                    }
+                                                }
+
+
+                                                    ?></b>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 extra_padding text_footer center">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <p>
+                                                                    Le foie &eacute;limine 95% de l'alcool dans le corps à raison de 0.10 à 0.20 g/l pour un homme et
+                                                                    0.085 à 0.10 g/l pour une femme pour nos calculs nous avons utilisés 0.15g/L pour un homme et
+                                                                    0.09 g/L pour une femme (ou genre indéfinie) les calculs ne prennent pas en compte les 5% restants
+                                                                    &eacute;liminées par l'air expiré et les urines
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-12 padding">
+                                                                <p>
+                                                                    apr&egrave;s ingestion d'un verre d'alcool le taux maximum est atteint 1h apr&egrave;s et 30 min si on est à jeun
+                                                                </p>
+                                                            </div>
+                                                        </div class="col-12 center padding">
+                                                        <p> - une dose de bar correspond à 0.10g d'alcool pur dans un verre</p>
+                                                        <p>- une dose maison correspond à 0.12.5g d'alcool pur dans un verre</p>
+                                                        <p>- une dose forte correspond à 0.15g d'acool pur dans un verre</p>
+
+                                                        <div class="col-12 padding">
+                                                            <p>l'intervalle d'incertitude est de {+5% et -0.5%} c'est-à-dire que les r&eacute;sultats seront plus souvent au-dessus qu'en dessous de la r&eacute;alit&eacute;
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </div>
 </body>
+<footer class="row">
+    <div class="col-12 footertext1">
+        Copyright © 2020 Amiens - France. Inc. Tous droits réservés.
+    </div>
+    <div class="offset-xl-3 offset-lg-2 offset-md-2 d-none d-md-block"></div>
+    <div class="col-xl-2 col-lg-3 col-md-3 footertext2 d-none d-md-block">CALCULATEUR</div>
+    <div class="col-xl-2 col-lg-3 col-md-3 footertext2 d-none d-md-block">CONTRAT D'UTILISATION</div>
+    <div class="col-xl-2 col-lg-3 col-md-3 footertext2 d-none d-md-block">MENTIONS L&Eacute;GALES</div>
+    <div class="offset-1"></div>
+
+    </div>
+    <div class="col-12 footerline d-none d-md-block"></div>
+    <div class="col-12 d-none d-md-block">
+        <div class="row">
+            <div class="offset-xl-4 offset-lg-4 offset-md-4 d-none d-md-block"></div>
+            <div class="col-xl-2 col-lg-2 col-md-3 footertext3 d-none d-md-block">Developped and designed by :</div>
+            <div class="col-xl-2 col-lg-2 col-md-3 footertext4 d-none d-md-block">Florian Wantelez, Mattei Freisi</div>
+        </div>
+    </div>
+    </div>
 
 </html>
