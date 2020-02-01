@@ -46,9 +46,11 @@
         $dose = 15 * $quantite;
     }
     $localtime = localtime();
-    $heureserv =  $localtime[2]+1;
-if ($heureserv <= 24){$heureserv = 0;}    
-    $minuteserv = $localtime[1];?>
+    $heureserv =  $localtime[2] + 1;
+    if ($heureserv <= 24) {
+        $heureserv = 0;
+    }
+    $minuteserv = $localtime[1]; ?>
     <div class="container">
         <div class="col-12">
             <div class="row">
@@ -66,7 +68,7 @@ if ($heureserv <= 24){$heureserv = 0;}
         // Fonction qui calcul l'acoolméie pour homme et femme//
         function Calcul_Taux_Alcool_Max($dose,  $masse, $Periode)
         {
-        
+
             if ($_POST['sexe'] === 'Homme') {
 
                 $taux = ($dose) / (0.7 * $masse);
@@ -316,7 +318,9 @@ if ($heureserv <= 24){$heureserv = 0;}
         $etat = calcul_montante_descente($_POST['dernierh'], $_POST['derniermin'], $heureserv, $minuteserv);
         $tauxnow = calcul_taux_now($_POST['sexe'], $tauxmax, $etat, $heuremax, $minutemax, $heureserv, $minuteserv);
         $indicetaux = affiche_phrase($tauxnow);
-        if ($tauxmax <0){$tauxmax = 0;}
+        if ($tauxmax < 0) {
+            $tauxmax = 0;
+        }
 
 
         $heureConfirmer = intval($horairelegal[0]);
@@ -522,22 +526,20 @@ if ($heureserv <= 24){$heureserv = 0;}
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <p>
-                                                                Le foie &eacute;limine 95% de l'alcool dans le corps à raison de 0.10 à 0.20 g/l pour un homme et
-                                                                0.085 à 0.10 g/l pour une femme pour nos calculs nous avons utilisés 0.15g/L pour un homme et
+                                                                Le foie &eacute;limine 95% de l'alcool dans le corps à raison de 0.10 à 0.20 g/l par heure pour un homme et
+                                                                0.085 à 0.10 g/l par heure pour une femme pour nos calculs nous avons utilisés 0.15g/L pour un homme et
                                                                 0.09 g/L pour une femme (ou genre indéfinie) les calculs ne prennent pas en compte les 5% restants
                                                                 &eacute;liminées par l'air expiré et les urines
                                                             </p>
                                                         </div>
-                                                        <div class="col-12 padding">
+                                                        <div class="col-12">
                                                             <p>
-                                                                apr&egrave;s ingestion d'un verre d'alcool le taux maximum est atteint 1h apr&egrave;s et 30 min si on est à jeun
+                                                                Pour trouver son taux en milligramme par litre d'air expiré ils suffit de diviser le taux en gramme litre de sang par 2 apr&egrave;s ingestion d'un verre d'alcool le taux maximum est atteint 1h apr&egrave;s et 30 min si on est à jeun
                                                             </p>
                                                         </div>
                                                     </div class="col-12 center padding">
                                                     <p> - une dose de bar correspond à 0.10g d'alcool pur dans un verre</p>
                                                     <p>- une dose maison correspond à 0.12.5g d'alcool pur dans un verre</p>
-                                                    <p>- une dose forte correspond à 0.15g d'acool pur dans un verre</p>
-
                                                     <div class="col-12 padding">
                                                         <p>l'intervalle d'incertitude est de {+5% et -0.5%} c'est-à-dire que les r&eacute;sultats seront plus souvent au-dessus qu'en dessous de la r&eacute;alit&eacute;
                                                     </div>

@@ -208,7 +208,7 @@
 								<div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 padding">
 									<form method="post" action="traitement.php">
 										<button type="submit" class="size">
-											Calculer le taux d'alcool&eacute;mie
+											Calculer&nbsp;le&nbsp;taux d'alcool&eacute;mie
 										</button>
 									</form>
 								</div>
