@@ -16,7 +16,7 @@ SELECT{
 
   font-size: 18px;
   width: 150%;
-  height: 100%;
+
 }
 .marginlft5{
 
@@ -30,7 +30,7 @@ input {
   text-align : center;
   font-size : 18px;
   width: 150%;
-  height: 100%;
+
 }
 
 .text{    
@@ -39,16 +39,6 @@ input {
   margin-left: -6%;
   }
 
-footer {
-
-  background-color:black;
-  padding-top: 5px;
-  padding-bottom: 10px;
-  position: absolute;
-  bottom: 0;
-  width: 105%;
-  height: 6%;
-}
 
 button {
 
@@ -87,10 +77,24 @@ button {
     margin-bottom: -3.5%;
 }
 
+footer {
+  
+  background-color:black;
+  padding-top: 15px;
+  padding-bottom: 25px;
+  position: relative;
+  bottom: 0;
+  width: 105%;
+  height: 15%;
+  padding-top: 15px;
+  padding-bottom: 25px;
+}
+.ma
 .paddingfooter{
 
-  margin-top : 37.5%;
+  margin-top : 20.5%;
 }
+
 
 .marginlft2 {
 

@@ -32,7 +32,7 @@
 	<div class="col-12 header">
 		<div class="row title">
 			<div class="col-12">
-				SUPER CALCULATEUR
+				CALCULATEUR
 				<!-- Header -->
 			</div>
 		</div>
@@ -72,10 +72,10 @@
 										<OPTION value="Femme"> Non d&eacute;finie </OPTION>
 									</SELECT>
 								</div>
-								<div class="offset-xl-1 offset-lg-1 offset-md-2 offset-sm-2 offset-1"></div>
+								<div class="offset-xl-1 offset-lg-1 offset-md-2 offset-sm-2 offset-2"></div>
 								<div class="col-xl-2 col-lg-2 col-md-3 col-sm-3 col-5">
 									<!-- formulaire du poids de l'utilisateur -->
-									<input required type="text" name="poid" value='' size="3" />
+									<input required type="text" name="poid" value='' size="3" required placeholder="poids"/>
 								</div>
 								<div class="col-1 marginlft4 text">kg</div>
 							</div>
@@ -106,11 +106,12 @@
 									Horaires de d&eacute;but et fin de consommation :
 								</div>
 								<div class="offset-xl-2 offset-lg-2 offset-md-0"></div>
-								<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-12 padding text">Premier verre</div>
+								<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-12 padding text d-sm-none">Heure premier verre</div>
+								<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-12 padding text d-none d-sm-block">Premier verre</div>
 
-								<div class="col-xl-2 col-lg-2 col-md-3 col-sm-5 col-6 padding paddingheure">
+								<div class="col-xl-2 col-lg-2 col-md-3 col-sm-5 col-12 padding paddingheure">
 									<div class="row">
-										<div class="col-6 marginlft selectsize">
+										<div class="col-4 col-xl-6 col-lg-6 col-md-4 col-sm-4 marginlft selectsize">
 											<!-- Select de l'heure du premier verre -->
 											<SELECT name="premierh" required>
 												<OPTION value=""> h</OPTION>
@@ -121,27 +122,29 @@
 
 											</SELECT>
 										</div>
-										<div class="col-6 marginlft2">
+										<div class="offset-2 offset-xl-0 offset-lg-0 offset-md-2 offset-sm-2"></div>
+										<div class="col-4 col-xl-6 col-lg-6 col-md-5 col-sm-5 marginlft2">
 											<!-- Select des minutes du premier verre -->
 											<SELECT name="premiermin" required>
 												<OPTION value="">min</OPTION>
 
 												<?php
 												$i = 0;
-												while ($i <= 55) {
+												while ($i <= 59) {
 													echo "<OPTION value=" . $i . "> " . $i . "min</OPTION>";
-													$i = $i + 15;
+													$i++;
 												} ?>
 
 											</SELECT>
 										</div>
 									</div>
 								</div>
-								<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-12 padding marginlft5 text"> Dernier verre </div>
+								<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-12 padding marginlft5 text text d-sm-none"> Heure dernier verre </div>
+								<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-12 padding text d-none d-sm-block">Premier verre</div>
 
-								<div class="col-xl-2 col-lg-2 col-md-3 col-sm-5 col-6 padding paddingheure">
+								<div class="col-xl-2 col-lg-2 col-md-3 col-sm-5 col-12 padding paddingheure">
 									<div class="row">
-										<div class="col-6 marginlft">
+										<div class="col-4 col-xl-6 col-lg-6 col-md-4 col-sm-4 marginlft">
 											<!-- Select de l'heure du dernier verre -->
 											<SELECT name="dernierh" required>
 												<OPTION value=""> h</OPTION>
@@ -152,16 +155,17 @@
 
 											</SELECT>
 										</div>
-										<div class="col-6 marginlft2">
+										<div class="offset-2 offset-xl-0 offset-lg-0 offset-md-2 offset-sm-2"></div>
+										<div class="col-4 col-xl-6 col-lg-6 col-md-5 col-sm-5 marginlft2">
 											<!-- Select des minutes du dernier verre -->
 											<SELECT name="derniermin" required>
 												<OPTION value="">min</OPTION>
 
 												<?php
 												$i = 0;
-												while ($i <= 55) {
+												while ($i <= 59) {
 													echo "<OPTION value=" . $i . "> " . $i . "min</OPTION>";
-													$i = $i + 15;
+													$i++;
 												} ?>
 
 											</SELECT>
@@ -177,24 +181,24 @@
 									Indiquez votre dosage d'alcool et le nombre de verres consomm&eacute;es :
 								</div>
 								<div class="col-xl-8 col-lg-10 col-md-12 col-12 d-sm-none text">
-									Dosage d'alcool et nombre de verres consomm&eacute;es :
+									Dose d'alcool pour 1 verre et nb de verres consommés :
 								</div>
 							</div>
-							<div class="col-12 ">
-								<div class="row padding">
-									<div class="offset-xl-4 offset-lg-4 offset-md-2 offset-sm-0 offset-0"></div>
-									<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-5 marginlft3">
-										<!-- Select des du dosage-->
-										<SELECT name="dosage" required>
-											<OPTION value="">Dosage</OPTION>
-											<OPTION value="bar"> BAR (STANDARD)</OPTION>
-											<OPTION value="maison"> MAISON </OPTION>
-											<OPTION value="fort"> FORT </OPTION>
-										</SELECT>
-									</div>
-									<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-5 marginright">
-										<input type="number" name="nbverres" required placeholder="0" />
-									</div>
+						</div>
+						<div class="col-12 padding">
+							<div class="row">
+								<div class="offset-xl-3 offset-lg-3 offset-md-2 offset-sm-0 offset-0"></div>
+								<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-5 ">
+									<!-- Select du dosage-->
+									<SELECT name="dosage" required>
+										<OPTION value="">Dosage</OPTION>
+										<OPTION selected value="bar"> 0.10g (BAR)</OPTION>
+										<OPTION value="maison"> 0.12g (MAISON) </OPTION>
+									</SELECT>
+								</div>
+								<div class="offset-2 offset-sm-2 offset-md-2 offset-lg-1 offset-xl-1"></div>
+								<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-4">
+									<input type="number" name="nbverres" required placeholder="0" />
 								</div>
 							</div>
 						</div>
@@ -219,27 +223,28 @@
 			</div>
 		</div>
 	</div>
-	<footer class="row">
-		<div class="col-12 footertext1">
-			Copyright © 2020 Amiens - France. Inc. Tous droits réservés.
-		</div>
-		<div class="offset-xl-3 offset-lg-2 offset-md-2 d-none d-md-block"></div>
-		<div class="col-xl-2 col-lg-3 col-md-3 footertext2 d-none d-md-block">CALCULATEUR</div>
-		<div class="col-xl-2 col-lg-3 col-md-3 footertext2 d-none d-md-block">CONTRAT D'UTILISATION</div>
-		<div class="col-xl-2 col-lg-3 col-md-3 footertext2 d-none d-md-block">MENTIONS L&Eacute;GALES</div>
-		<div class="offset-1"></div>
-
-		</div>
-		<div class="col-12 footerline d-none d-md-block"></div>
-		<div class="col-12 d-none d-md-block">
-			<div class="row">
-				<div class="offset-xl-4 offset-lg-4 offset-md-4 d-none d-md-block"></div>
-				<div class="col-xl-2 col-lg-2 col-md-3 footertext3 d-none d-md-block">Developped and designed by :</div>
-				<div class="col-xl-2 col-lg-2 col-md-3 footertext4 d-none d-md-block">Florian Wantelez, Mattei Freisi</div>
-
-			</div>
-		</div>
-		</div>
 </body>
+<footer class="row">
+	<div class="col-12 footertext1">
+		Copyright © 2020 Amiens - France. Inc. Tous droits réservés.
+	</div>
+
+	<div class="offset-xl-3 offset-lg-2 offset-md-2 d-none d-md-block"></div>
+	<div class="col-xl-2 col-lg-3 col-md-3 footertext2 d-none d-md-block">CALCULATEUR</div>
+	<div class="col-xl-2 col-lg-3 col-md-3 footertext2 d-none d-md-block">CONTRAT D'UTILISATION</div>
+	<div class="col-xl-2 col-lg-3 col-md-3 footertext2 d-none d-md-block">MENTIONS L&Eacute;GALES</div>
+	<div class="offset-1"></div>
+	</div>
+	<div class="col-12 footerline"></div>
+	<div class="col-12">
+		<div class="row">
+			<div class="offset-xl-4 offset-lg-4 offset-md-4 d-none d-md-block"></div>
+			<div class="col-xl-2 col-lg-2 col-md-3 footertext3 d-none d-md-block">Developped and designed by :</div>
+			<div class="col-xl-2 col-lg-2 col-md-3 footertext4 d-none d-md-block">Florian Wantelez, Mattei Freisi</div>
+
+		</div>
+	</div>
+	</div>
+</footer>
 
 </html>

@@ -109,6 +109,12 @@
   
     text-align: center;
   }
+  footer {
+
+    background-color:white;
+  
+  }
+  
   
   
   /*
@@ -201,13 +207,7 @@
   
   margin-bottom: 4.5%;
   }
-  footer {
-  
-    background-color:black;
-    padding-top: 10px;
-    padding-bottom: 10px;
-  
-  }
+
   
   .paddingtitle{
   

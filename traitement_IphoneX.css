@@ -66,6 +66,14 @@
     font-family: 'Questrial', sans-serif;
     background-color:white ;
   }
+  footer {
+
+    background-color:white;
+  
+  }
+
+  
+
   
   
   SELECT{
@@ -82,7 +90,7 @@
   font-weight: 700;
   font-size: 22px;
   margin-top: 7.5%;
-  margin-bottom: 21.5%;
+  margin-bottom: 37.5%;
   }
   .bordur {
   
@@ -203,13 +211,7 @@
   
   margin-bottom: 4.5%;
   }
-  footer {
-  
-    background-color:black;
-    padding-top: 15px;
-    padding-bottom: 25px;
-  
-  }
+
   
   .paddingtitle{
   

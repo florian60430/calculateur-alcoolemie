@@ -16,7 +16,7 @@ input, SELECT {
   
   font-size: 20px;
   width: 150%;
-  height: 110%;
+
   }
   
   input {
@@ -25,7 +25,7 @@ input, SELECT {
   text-align : center;
   font-size : 20px;
   width: 150%;
-  height: 110%;
+
   }
   
   .text{    
@@ -36,20 +36,23 @@ input, SELECT {
   
   footer {
   
-  background-color:black;
-  padding-top: 5px;
-  padding-bottom: 10px;
-  position: absolute;
-  bottom: 0;
-  width: 105%;
-  height: 6%;
+    background-color:black;
+    padding-top: 15px;
+    padding-bottom: 25px;
+    position: relative;
+    bottom: 0;
+    width: 105%;
+    height: 15%;
+    padding-top: 15px;
+    padding-bottom: 25px;
   }
   .marginlft5{
   
   margin-left: -0px;
   
   }
-  
+
+    
   button {
   
   text-align: center;
@@ -88,7 +91,7 @@ input, SELECT {
   
   .paddingfooter{
   
-  margin-top : 37.5%;
+  margin-top : 20.5%;
   }
   
   .marginlft2 {

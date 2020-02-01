@@ -24,7 +24,7 @@
         <div class="col-12 font">
             <div class="row title">
                 <div class="col-12">
-                    SUPER CALCULATEUR
+                    CALCULATEUR
                 </div>
             </div>
 
@@ -46,9 +46,9 @@
         $dose = 15 * $quantite;
     }
     $localtime = localtime();
-    $heureserv =  date('h');
-    $minuteserv = date('i');
-    echo $heureserv . 'h' . $minuteserv; ?>
+    $heureserv =  $localtime[2]+1;
+if ($heureserv <= 24){$heureserv = 0;}    
+    $minuteserv = $localtime[1];?>
     <div class="container">
         <div class="col-12">
             <div class="row">
@@ -64,15 +64,18 @@
 
         <?php
         // Fonction qui calcul l'acoolméie pour homme et femme//
-        function Calcul_Taux_Alcool_Max($dose,  $masse)
+        function Calcul_Taux_Alcool_Max($dose,  $masse, $Periode)
         {
+        
             if ($_POST['sexe'] === 'Homme') {
 
-                $taux = ($dose) / (0.7 * $masse); // soustraire la perte dans un autre fonciton
+                $taux = ($dose) / (0.7 * $masse);
+                $taux = $taux - $Periode * 0.0025;                                         // soustraire la perte dans un autre fonciton
                 return $taux;
             } else {
 
                 $taux = ($dose) / (0.6 * $masse);
+                $taux = $taux - $Periode * 0.0015;
                 return $taux;
             }
         }
@@ -121,23 +124,18 @@
                 } else {
 
                     $rest =  $servheure - $lastheure; //  389
-
-
                     $tauxnow = $taux - 0.0015 * $rest;
                 }
             } else {
 
                 if ($sexe == "Homme") {
 
-                    $rest =  $servheure - $lastheure;
-                    $perte =  0.0025 * $rest;
                     $heuremax =  ($lastheure + 60);
                     $tauxnow = $taux * $servheure / $heuremax;
                 } else {
 
                     $rest =  $servheure - $lastheure;
 
-                    $perte =  0.0015 * $rest;
                     $heuremax =  ($lastheure + 60);
                     $tauxnow = $taux * $servheure / $heuremax;
                 }
@@ -303,7 +301,7 @@
 
         // fonction qui calcul le taux d'alcool que l'utilisateur à éléminer pendant sa consomation // 
         $Periode = calculperiode($_POST['premierh'], $_POST['premiermin'], $_POST['dernierh'], $_POST['derniermin']);
-        $tauxmax = Calcul_Taux_Alcool_Max($dose, $_POST['poid']);
+        $tauxmax = Calcul_Taux_Alcool_Max($dose, $_POST['poid'], $Periode);
         $tauxmax = number_format($tauxmax, '2', '.', '');
         $newhoraire = Calcul_Temp_Max_Alcoolémie($_POST['repas'], $_POST['dernierh'], $_POST['derniermin']);
         $heuremax = $newhoraire[0];
@@ -316,8 +314,9 @@
 
 
         $etat = calcul_montante_descente($_POST['dernierh'], $_POST['derniermin'], $heureserv, $minuteserv);
-        $tauxnow = calcul_taux_now($_POST['sexe'], $tauxmax, $etat, $_POST['dernierh'], $_POST['derniermin'], $heureserv, $minuteserv);
+        $tauxnow = calcul_taux_now($_POST['sexe'], $tauxmax, $etat, $heuremax, $minutemax, $heureserv, $minuteserv);
         $indicetaux = affiche_phrase($tauxnow);
+        if ($tauxmax <0){$tauxmax = 0;}
 
 
         $heureConfirmer = intval($horairelegal[0]);
@@ -518,39 +517,40 @@
                                                     ?></b>
                                                         </div>
                                                     </div>
-                                                    <div class="col-12 extra_padding text_footer center">
-                                                        <div class="row">
-                                                            <div class="col-12">
-                                                                <p>
-                                                                    Le foie &eacute;limine 95% de l'alcool dans le corps à raison de 0.10 à 0.20 g/l pour un homme et
-                                                                    0.085 à 0.10 g/l pour une femme pour nos calculs nous avons utilisés 0.15g/L pour un homme et
-                                                                    0.09 g/L pour une femme (ou genre indéfinie) les calculs ne prennent pas en compte les 5% restants
-                                                                    &eacute;liminées par l'air expiré et les urines
-                                                                </p>
-                                                            </div>
-                                                            <div class="col-12 padding">
-                                                                <p>
-                                                                    apr&egrave;s ingestion d'un verre d'alcool le taux maximum est atteint 1h apr&egrave;s et 30 min si on est à jeun
-                                                                </p>
-                                                            </div>
-                                                        </div class="col-12 center padding">
-                                                        <p> - une dose de bar correspond à 0.10g d'alcool pur dans un verre</p>
-                                                        <p>- une dose maison correspond à 0.12.5g d'alcool pur dans un verre</p>
-                                                        <p>- une dose forte correspond à 0.15g d'acool pur dans un verre</p>
-
-                                                        <div class="col-12 padding">
-                                                            <p>l'intervalle d'incertitude est de {+5% et -0.5%} c'est-à-dire que les r&eacute;sultats seront plus souvent au-dessus qu'en dessous de la r&eacute;alit&eacute;
+                                                </div>
+                                                <div class="col-12 extra_padding text_footer center">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <p>
+                                                                Le foie &eacute;limine 95% de l'alcool dans le corps à raison de 0.10 à 0.20 g/l pour un homme et
+                                                                0.085 à 0.10 g/l pour une femme pour nos calculs nous avons utilisés 0.15g/L pour un homme et
+                                                                0.09 g/L pour une femme (ou genre indéfinie) les calculs ne prennent pas en compte les 5% restants
+                                                                &eacute;liminées par l'air expiré et les urines
+                                                            </p>
                                                         </div>
+                                                        <div class="col-12 padding">
+                                                            <p>
+                                                                apr&egrave;s ingestion d'un verre d'alcool le taux maximum est atteint 1h apr&egrave;s et 30 min si on est à jeun
+                                                            </p>
+                                                        </div>
+                                                    </div class="col-12 center padding">
+                                                    <p> - une dose de bar correspond à 0.10g d'alcool pur dans un verre</p>
+                                                    <p>- une dose maison correspond à 0.12.5g d'alcool pur dans un verre</p>
+                                                    <p>- une dose forte correspond à 0.15g d'acool pur dans un verre</p>
+
+                                                    <div class="col-12 padding">
+                                                        <p>l'intervalle d'incertitude est de {+5% et -0.5%} c'est-à-dire que les r&eacute;sultats seront plus souvent au-dessus qu'en dessous de la r&eacute;alit&eacute;
                                                     </div>
                                                 </div>
-                                                </form>
                                             </div>
+                                            </form>
                                         </div>
                                     </div>
                         </div>
+                    </div>
 </body>
 <footer class="row">
-    <div class="col-12 footertext1">
+    <div class="col-12 footertext1 d-none d-md-block">
         Copyright © 2020 Amiens - France. Inc. Tous droits réservés.
     </div>
     <div class="offset-xl-3 offset-lg-2 offset-md-2 d-none d-md-block"></div>
