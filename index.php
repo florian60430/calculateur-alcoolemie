@@ -25,7 +25,7 @@
 
 
 
-	<title>Calculateur d'alcol&eacute;mie en ligne gratuit</title>
+	<title>Calculateur d'alcool&eacute;mie en ligne gratuit</title>
 </head>
 
 <body>
@@ -140,7 +140,7 @@
 									</div>
 								</div>
 								<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-12 padding marginlft5 text text d-sm-none"> Heure dernier verre </div>
-								<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-12 padding text d-none d-sm-block">Premier verre</div>
+								<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-12 padding text d-none d-sm-block">Dernier verre</div>
 
 								<div class="col-xl-2 col-lg-2 col-md-3 col-sm-5 col-12 padding paddingheure">
 									<div class="row">
@@ -192,8 +192,8 @@
 									<!-- Select du dosage-->
 									<SELECT name="dosage" required>
 										<OPTION value="">Dosage</OPTION>
-										<OPTION selected value="bar"> 0.10g (BAR)</OPTION>
-										<OPTION value="maison"> 0.12g (MAISON) </OPTION>
+										<OPTION selected value="bar"> BAR</OPTION>
+										<OPTION value="maison"> MAISON </OPTION>
 									</SELECT>
 								</div>
 								<div class="offset-2 offset-sm-2 offset-md-2 offset-lg-1 offset-xl-1"></div>

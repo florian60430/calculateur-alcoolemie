@@ -35,22 +35,24 @@
         </div>
     </header>
     <?php
-    $premierverre = $_POST['premierh'] . $_POST['derniermin'] . '00';
+    $premierverre = $_POST['premierh'] . $_POST['premiermin'] . '00';
     $dernierverre = $_POST['dernierh'] . $_POST['derniermin'] . '00';
     $quantite = intval($_POST['nbverres']);
-    if ($_POST['dosage'] == 'bar') {
-        $dose = 10 * $quantite;
-    } else if ($_POST['dosage'] == 'maison') {
-        $dose = 12.5 * $quantite;
+
+    if ($_POST['dosage'] == 'maison') {
+
+        $dose = 12 * $quantite;
     } else {
-        $dose = 15 * $quantite;
+        $dose = 10 * $quantite;
     }
     $localtime = localtime();
-    $heureserv =  $localtime[2] + 1;
-    if ($heureserv <= 24) {
+    $heureserv =  $localtime[2];
+    if ($heureserv >= 24) {
         $heureserv = 0;
     }
-    $minuteserv = $localtime[1]; ?>
+    $minuteserv = $localtime[1];
+
+    echo $heureserv . "h" . $minuteserv; ?>
     <div class="container">
         <div class="col-12">
             <div class="row">
@@ -72,14 +74,36 @@
             if ($_POST['sexe'] === 'Homme') {
 
                 $taux = ($dose) / (0.7 * $masse);
-                $taux = $taux - $Periode * 0.0025;                                         // soustraire la perte dans un autre fonciton
+                $taux = $taux - ($Periode * 0.0017);                                         // soustraire la perte dans un autre fonciton
                 return $taux;
             } else {
 
                 $taux = ($dose) / (0.6 * $masse);
-                $taux = $taux - $Periode * 0.0015;
+                $taux = $taux - ($Periode * 0.0014);
                 return $taux;
             }
+        }
+
+        function CalculTauxMaxMontante($taux, $hmax, $minmax, $h, $min)
+
+        {
+            if ($h < $hmax) {
+
+                $lastheure = ($hmax * 60) + $minmax;
+                $servheure = (($h + 24) * 60) + $min;
+            } else {
+
+                $lastheure = ($hmax * 60) + $minmax;
+                $servheure = ($h * 60) + $min;
+            }
+
+            $rest = $servheure - $lastheure;
+            $rest = $rest / 60;
+
+
+
+            $tauxmaxmontant = $taux + (0.12 * $rest);
+            return $tauxmaxmontant;
         }
 
         // Fonction qui calcul l'horaire de l'acoolémie maximum de l'utilisateur
@@ -121,25 +145,26 @@
 
                 if ($sexe == 'Homme') {
 
-                    $rest = $servheure - $lastheure; //pb élimine 0.20g en l'espace de 15min ?
-                    $tauxnow = $taux - 0.0025 * $rest;
+                    $rest = $servheure - $lastheure;
+                    $tauxnow = $taux - (0.0017 * $rest);
                 } else {
 
                     $rest =  $servheure - $lastheure; //  389
-                    $tauxnow = $taux - 0.0015 * $rest;
+                    $tauxnow = $taux - (0.0014 * $rest);
                 }
             } else {
 
+                $rest = $servheure - $lastheure;
                 if ($sexe == "Homme") {
 
                     $heuremax =  ($lastheure + 60);
-                    $tauxnow = $taux * $servheure / $heuremax;
+                    $tauxnow = $taux;
                 } else {
 
                     $rest =  $servheure - $lastheure;
 
                     $heuremax =  ($lastheure + 60);
-                    $tauxnow = $taux * $servheure / $heuremax;
+                    $tauxnow = $taux;
                 }
             }
 
@@ -161,13 +186,13 @@
             if ($_POST['sexe'] == 'Homme') {
                 while ($taux > 0) {
 
-                    $taux = $taux - 0.0025;
+                    $taux = $taux - 0.0017;
                     $compteur = $compteur + 1;
                 }
             } else {
                 while ($taux > 0) {
 
-                    $taux = $taux - 0.0015;
+                    $taux = $taux - 0.0014;
                     $compteur = $compteur + 1;
                 }
             }
@@ -190,13 +215,13 @@
             if ($_POST['sexe'] == 'Homme') {
                 while ($taux > 0.50) {
 
-                    $taux = $taux - 0.0025;
+                    $taux = $taux - 0.0017;
                     $compteur = $compteur + 1;
                 }
             } else {
                 while ($taux > 0.50) {
 
-                    $taux = $taux - 0.0015;
+                    $taux = $taux - 0.0014;
                     $compteur = $compteur + 1;
                 }
             }
@@ -219,13 +244,13 @@
             if ($_POST['sexe'] == 'Homme') {
                 while ($taux > 0.20) {
 
-                    $taux = $taux - 0.0025;
+                    $taux = $taux - 0.0017;
                     $compteur = $compteur + 1;
                 }
             } else {
                 while ($taux > 0.20) {
 
-                    $taux = $taux - 0.0015;
+                    $taux = $taux - 0.0014;
                     $compteur = $compteur + 1;
                 }
             }
@@ -255,7 +280,7 @@
                 $lastheure = ($lasth * 60) + $lastm; //1030
                 $servheure = ($hserv * 60) + $minserv; //1033
             }
-            if (($lastheure - $servheure) <= -60) // 
+            if (($servheure - $lastheure) >= 60) // 
 
             {
 
@@ -317,6 +342,8 @@
 
         $etat = calcul_montante_descente($_POST['dernierh'], $_POST['derniermin'], $heureserv, $minuteserv);
         $tauxnow = calcul_taux_now($_POST['sexe'], $tauxmax, $etat, $heuremax, $minutemax, $heureserv, $minuteserv);
+        $tauxmontantmax = CalculTauxMaxMontante($tauxmax, $_POST['dernierh'],  $_POST['derniermin'], $heureserv, $minuteserv);
+        $tauxmontantmax = number_format($tauxmontantmax, '2', '.', '');
         $indicetaux = affiche_phrase($tauxnow);
         if ($tauxmax < 0) {
             $tauxmax = 0;
@@ -385,7 +412,7 @@
                         echo ' votre taux maximum d\'alcolémie dans le sang';
 
                         if ($etat == 'montant') {
-                            echo  ' sera de : <b>' . $tauxmax . ' g/L </b>';
+                            echo  ' sera de : <b>' . $tauxmontantmax . ' g/L </b>';
                         } else
 
 
@@ -527,8 +554,8 @@
                                                         <div class="col-12">
                                                             <p>
                                                                 Le foie &eacute;limine 95% de l'alcool dans le corps à raison de 0.10 à 0.20 g/l par heure pour un homme et
-                                                                0.085 à 0.10 g/l par heure pour une femme pour nos calculs nous avons utilisés 0.15g/L pour un homme et
-                                                                0.09 g/L pour une femme (ou genre indéfinie) les calculs ne prennent pas en compte les 5% restants
+                                                                0.085 à 0.10 g/l par heure pour une femme pour nos calculs nous avons utilisés 0.12g/L pour un homme et
+                                                                0.085 g/L pour une femme (ou genre indéfinie) les calculs ne prennent pas en compte les 5% restants
                                                                 &eacute;liminées par l'air expiré et les urines
                                                             </p>
                                                         </div>
@@ -537,19 +564,22 @@
                                                                 Pour trouver son taux en milligramme par litre d'air expiré ils suffit de diviser le taux en gramme litre de sang par 2 apr&egrave;s ingestion d'un verre d'alcool le taux maximum est atteint 1h apr&egrave;s et 30 min si on est à jeun
                                                             </p>
                                                         </div>
-                                                    </div class="col-12 center padding">
-                                                    <p> - une dose de bar correspond à 0.10g d'alcool pur dans un verre</p>
-                                                    <p>- une dose maison correspond à 0.12.5g d'alcool pur dans un verre</p>
-                                                    <div class="col-12 padding">
-                                                        <p>l'intervalle d'incertitude est de {+5% et -0.5%} c'est-à-dire que les r&eacute;sultats seront plus souvent au-dessus qu'en dessous de la r&eacute;alit&eacute;
+
+                                                        <div class="col-12 padding">
+                                                            <p>l'intervalle d'incertitude est de {+5% et -0.5%} c'est-à-dire que les r&eacute;sultats seront plus souvent au-dessus qu'en dessous de la r&eacute;alit&eacute;
+
+                                                        </div>
                                                     </div>
+                                                    </form>
                                                 </div>
                                             </div>
-                                            </form>
                                         </div>
                                     </div>
                         </div>
                     </div>
+
+
+
 </body>
 <footer class="row">
     <div class="col-12 footertext1 d-none d-md-block">
