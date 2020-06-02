@@ -69,15 +69,15 @@
 										<OPTION value=""> Sexe </OPTION>
 										<OPTION value="Homme"> Homme </OPTION>
 										<OPTION value="Femme"> Femme </OPTION>
-										<OPTION value="Femme"> Non d&eacute;finie </OPTION>
+										<OPTION value="Femme"> Non d&eacute;fini </OPTION>
 									</SELECT>
 								</div>
 								<div class="offset-xl-1 offset-lg-1 offset-md-2 offset-sm-2 offset-2"></div>
 								<div class="col-xl-2 col-lg-2 col-md-3 col-sm-3 col-5">
 									<!-- formulaire du poids de l'utilisateur -->
-									<input required type="text" name="poid" value='' size="3" required placeholder="poids"/>
+									<input required type="text" name="poid" value='' size="3" required placeholder="poids en kg"/>
 								</div>
-								<div class="col-1 marginlft4 text">kg</div>
+								<div class="col-1 marginlft4 text"></div>
 							</div>
 						</div>
 						<div class="col-12 padding">
@@ -130,9 +130,9 @@
 
 												<?php
 												$i = 0;
-												while ($i <= 59) {
+												while ($i <= 55) {
 													echo "<OPTION value=" . $i . "> " . $i . "min</OPTION>";
-													$i++;
+													$i = $i+5;
 												} ?>
 
 											</SELECT>
@@ -165,7 +165,7 @@
 												$i = 0;
 												while ($i <= 59) {
 													echo "<OPTION value=" . $i . "> " . $i . "min</OPTION>";
-													$i++;
+													$i = $i+5;
 												} ?>
 
 											</SELECT>
@@ -178,10 +178,10 @@
 							<div class="row">
 								<div class="offset-xl-2 offset-lg-2 offset-md-0"></div>
 								<div class="col-xl-8 col-lg-10 col-md-12 col-12 d-none d-sm-block text">
-									Indiquez votre dosage d'alcool et le nombre de verres consomm&eacute;es :
+									Indiquez votre type de verre et le nombre de verres consomm&eacute;es :
 								</div>
 								<div class="col-xl-8 col-lg-10 col-md-12 col-12 d-sm-none text">
-									Dose d'alcool pour 1 verre et nb de verres consommés :
+									Type de verre et nombre de verres consommés :
 								</div>
 							</div>
 						</div>

@@ -51,8 +51,7 @@
         $heureserv = 0;
     }
     $minuteserv = $localtime[1];
-
-    echo $heureserv . "h" . $minuteserv; ?>
+?>
     <div class="container">
         <div class="col-12">
             <div class="row">
@@ -394,11 +393,12 @@
                 <div class="offset-2"></div>
             </div>
         </div>
-        <div class="d-none d-sm-block">
             <div class="col-12 text ">
                 <div class="row bordur">
                     <div class="offset-xl-3 offset-lg-3 offset-md-1 offset-0"></div>
                     <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-12 center">
+                    <div class="d-none d-sm-block">
+                        <i>
                         <?php
                         echo 'Vous êtes en débit ';
                         if ($etat == "montant") {
@@ -409,7 +409,7 @@
                             echo 'descendant';
                         }
 
-                        echo ' votre taux maximum d\'alcolémie dans le sang';
+                        echo ' votre taux maximum d\'alcoolémie dans le sang';
 
                         if ($etat == 'montant') {
                             echo  ' sera de : <b>' . $tauxmontantmax . ' g/L </b>';
@@ -422,8 +422,45 @@
                         if ($etat == 'montant') {
                             echo  ' l\'atteindrez';
                         } else {
-                            echo  ' l\'avez atteind';
+                            echo  ' l\'avez atteint';
                         }
+
+                        if ($minutemax >= 60){
+
+                            $minutemax = $minutemax - 60;
+                            $heuremax = $heuremax + 1;
+                        }
+
+                        if ($heuremax >= 24 && $etat == 'montant'){
+
+                            $heuremax = $heuremax - 24;
+                        
+                            if ($minutemax < 10) {
+
+
+                                echo ' demain à <b>' . $heuremax . 'h0' . $minutemax . '</b>';
+                            } else {
+    
+                                echo ' demain à <b>' . $heuremax . 'h' . $minutemax . '</b>';
+                            
+                            } 
+
+                        } else if($heuremax >= 24 && $etat == 'descente') {
+                            $heuremax = $heuremax - 24;
+                        
+                            if ($minutemax < 10) {
+
+
+                                echo '  à <b>' . $heuremax . 'h0' . $minutemax . '</b>';
+                            } else {
+    
+                                echo ' à <b>' . $heuremax . 'h' . $minutemax . '</b>';
+                            
+                            } 
+             }
+                            
+                    else{
+
                         if ($minutemax < 10) {
 
 
@@ -431,7 +468,9 @@
                         } else {
 
                             echo ' à <b>' . $heuremax . 'h' . $minutemax . '</b>';
-                        } ?>
+                        } 
+                    }
+                ?></div>
                         <?php
                         if ($tauxnow == 0) {
 
@@ -463,6 +502,9 @@
                         ?>
                     </div>
                 </div>
+                    </i>
+                    
+                    <div class="d-none d-sm-block">
                 <div class="col-12">
                     <div class="row">
                         <div class="col-12 bordur infosobre">
@@ -502,7 +544,7 @@
                                         } else if ($heureConfirmer > 48) { ?>
 
                                             <div class="rouge">Pour un conducteur confirmé vous passerez le seuil l&eacute;gal des 0.50g/L dans
-                                        <?php echo '<u>' . $heureConfirmer . 'heures </u>et <u>' . $minuteConfirmer . 'minutes </u>.';
+                                        <?php echo '<u>' . $heureConfirmer . ' heures </u>et <u>' . $minuteConfirmer . ' minutes </u>.';
                                         }
                                     }
                                         ?></b>
@@ -540,7 +582,7 @@
                                                     } else if ($heurejeune > 48) { ?>
 
                                                         <div class="rouge"> Pour un jeune conducteur vous passerez le seuil l&eacute;gal des 0.20g/L dans
-                                                    <?php echo '<u>' . $heurejeune . 'heures </u>et <u>' . $minutejeune . '</u> minutes';
+                                                    <?php echo '<u>' . $heurejeune . ' heures </u>et <u>' . $minutejeune . ' minutes</u>';
                                                     }
                                                 }
 
@@ -554,14 +596,14 @@
                                                         <div class="col-12">
                                                             <p>
                                                                 Le foie &eacute;limine 95% de l'alcool dans le corps à raison de 0.10 à 0.20 g/l par heure pour un homme et
-                                                                0.085 à 0.10 g/l par heure pour une femme pour nos calculs nous avons utilisés 0.12g/L pour un homme et
-                                                                0.085 g/L pour une femme (ou genre indéfinie) les calculs ne prennent pas en compte les 5% restants
+                                                                0.085 à 0.10 g/l par heure pour une femme pour nos calculs nous avons utilisé 0.12g/L pour un homme et
+                                                                0.085 g/L pour une femme (ou genre indéfini) les calculs ne prennent pas en compte les 5% restant
                                                                 &eacute;liminées par l'air expiré et les urines
                                                             </p>
                                                         </div>
                                                         <div class="col-12">
                                                             <p>
-                                                                Pour trouver son taux en milligramme par litre d'air expiré ils suffit de diviser le taux en gramme litre de sang par 2 apr&egrave;s ingestion d'un verre d'alcool le taux maximum est atteint 1h apr&egrave;s et 30 min si on est à jeun
+                                                                Pour trouver son taux en milligramme par litre d'air expiré il suffit de diviser le taux en grammes par litre de sang par 2 apr&egrave;s ingestion d'un verre d'alcool le taux maximum est atteint 1h apr&egrave;s et 30 min si on est à jeun
                                                             </p>
                                                         </div>
 
