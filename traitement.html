@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <link href="bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet"> <!-- Bootstrap (pour le design) -->
+    <link href="traitement.css" rel="stylesheet">
+    <link rel="stylesheet" media="screen and (min-width: 767px) and (max-width: 992px) " href="traitement_md.css" /> <!-- Pour ceux qui ont une résolution inférieure à 992px -->
+    <link rel="stylesheet" media="screen and (min-width: 575px) and (max-width: 767px)" href="traitement_sm.css" /> <!-- Pour ceux qui ont une résolution inférieure à 767px -->
+    <link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 575px) and (min-height: 569px) and (max-height: 735px)" href="traitement_xs.css" /> <!-- Pour ceux qui ont une résolution inférieure à 575px -->
+    <link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 575px) and (min-height: 735px) and (max-height: 811px)" href="traitement_Iphone8.css" />
+    <link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 575px) and (min-height: 811px) and (max-height: 900px)" href="traitement_IphoneX.css" />
+    <link rel="stylesheet" media="screen and (min-width: 0px) and (max-width: 575px) and (min-height: 0px) and (max-height: 570px)" href="traitement_Iphone5.css" />
+    <link href="https://fonts.googleapis.com/css?family=Questrial&display=swap" rel="stylesheet">
+
+    <title>PICOLO CALCULATOR</title>
+</head>
+
+<body>
+    <header>
+        <div class="col-12 font">
+            <div class="row title">
+                <div class="col-12">
+                    CALCULATEUR
+                </div>
+            </div>
+
+            <div class="row title2">
+                <div class="col-12">
+                    D'ALCOOL&Eacute;MIE</div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="col-12">
+            <div class="row">
+                <div class="offset-xl-4 offset-lg-5 offset-md-4 offset-sm-4 offset-2"></div>
+                <div class="col-8 col-xl-2 col-lg-2 col-md-4 col-sm-5 btncalcul padding">
+                    <form action="index.php">
+                        <input type="submit" value="Nouveau calcul">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12 center text paddingtitle"> Votre taux actuel :
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 tauxnow">
+                    2.56g/L
+                </div>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12 center info">
+                    Vous pouvez tomber dans le coma, danger de mort immédiate.
+                </div>
+                <div class="offset-2"></div>
+            </div>
+        </div>
+            <div class="col-12 text ">
+                <div class="row bordur">
+                    <div class="offset-xl-3 offset-lg-3 offset-md-1 offset-0"></div>
+                    <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-12 center">
+                    <div class="d-none d-sm-block">
+                        Vous êtes en débit descendant votre taux maximum d&apos;alcoolémie dans le sang était de : <b> 3.88 g/L </b> vous l'avez atteint à <b> 4h35 </b>
+                        vous serez sobre à <b>11h45</b>
+                    </div>
+                </div>                 
+                    <div class="d-none d-sm-block">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12 bordur infosobre">
+                                    <div class="rouge">Pour un conducteur confirmé vous passerez le seuil l&eacute;gal des 0.50g/L à 9h23</div>
+                                    <div class="rouge"> Pour un jeune conducteur vous passerez le seuil l&eacute;gal des 0.20g/L à 10h45</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 extra_padding text_footer center">
+                    <div class="row">
+                        <div class="col-12">
+                            <p>
+                                Le foie &eacute;limine 95% de l'alcool dans le corps à raison de 0.10 à 0.20 g/l par heure pour un homme et
+                                0.085 à 0.10 g/l par heure pour une femme pour nos calculs nous avons utilisé 0.12g/L pour un homme et
+                                0.085 g/L pour une femme (ou genre indéfini) les calculs ne prennent pas en compte les 5% restant
+                                &eacute;liminées par l'air expiré et les urines
+                            </p>
+                        </div>
+                        <div class="col-12">
+                            <p>
+                                Pour trouver son taux en milligramme par litre d'air expiré il suffit de diviser le taux en grammes par litre de sang par 2 apr&egrave;s ingestion d'un verre d'alcool le taux maximum est atteint 1h apr&egrave;s et 30 min si on est à jeun
+                            </p>
+                        </div>
+
+                        <div class="col-12 padding">
+                            <p>l'intervalle d'incertitude est de {+5% et -0.5%} c'est-à-dire que les r&eacute;sultats seront plus souvent au-dessus qu'en dessous de la r&eacute;alit&eacute;
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<footer class="row">
+    <div class="col-12 footertext1 d-none d-md-block">
+        Copyright © 2020 Amiens - France. Inc. Tous droits réservés.
+    </div>
+    <div class="offset-xl-3 offset-lg-2 offset-md-2 d-none d-md-block"></div>
+    <div class="col-xl-2 col-lg-3 col-md-3 footertext2 d-none d-md-block">CALCULATEUR</div>
+    <div class="col-xl-2 col-lg-3 col-md-3 footertext2 d-none d-md-block">CONTRAT D'UTILISATION</div>
+    <div class="col-xl-2 col-lg-3 col-md-3 footertext2 d-none d-md-block">MENTIONS L&Eacute;GALES</div>
+    <div class="offset-1"></div>
+
+    </div>
+    <div class="col-12 footerline d-none d-md-block"></div>
+    <div class="col-12 d-none d-md-block">
+        <div class="row">
+            <div class="offset-xl-4 offset-lg-4 offset-md-4 d-none d-md-block"></div>
+            <div class="col-xl-2 col-lg-2 col-md-3 footertext3 d-none d-md-block">Developped and designed by :</div>
+            <div class="col-xl-2 col-lg-2 col-md-3 footertext4 d-none d-md-block">Florian Wantelez, Mattei Freisi</div>
+        </div>
+    </div>
+</footer>
+</html>
