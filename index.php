@@ -240,7 +240,7 @@
 		<div class="row">
 			<div class="offset-xl-4 offset-lg-4 offset-md-4 d-none d-md-block"></div>
 			<div class="col-xl-2 col-lg-2 col-md-3 footertext3 d-none d-md-block">Developped and designed by :</div>
-			<div class="col-xl-2 col-lg-2 col-md-3 footertext4 d-none d-md-block">Florian Wantelez, Mattei Freisi</div>
+			<div class="col-xl-2 col-lg-2 col-md-3 footertext4 d-none d-md-block">Florian Wantelez</div>
 
 		</div>
 	</div>
