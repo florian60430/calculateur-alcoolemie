@@ -113,13 +113,20 @@
 									<div class="row">
 										<div class="col-4 col-xl-6 col-lg-6 col-md-4 col-sm-4 marginlft selectsize">
 											<!-- Select de l'heure du premier verre -->
-											<SELECT name="premierh" required>
+											<SELECT name="premierh">
 												<OPTION value=""> h</OPTION>
-
-												<?php for ($i = 0; $i < 24; $i++) {
-													echo "<OPTION value=" . $i . "> " . $i . "h</OPTION>";
-												} ?>
-
+												<OPTION value=""> 1h</OPTION>
+												<OPTION value=""> 2h</OPTION>
+												<OPTION value=""> 3h</OPTION>
+												<OPTION value=""> 4h</OPTION>
+												<OPTION value=""> 5h</OPTION>
+												<OPTION value=""> 6h</OPTION>
+												<OPTION value=""> 7h</OPTION>
+												<OPTION value=""> 8h</OPTION>
+												<OPTION value=""> 9h</OPTION>
+												<OPTION value=""> 10h</OPTION>
+												<OPTION value=""> 11h</OPTION>
+												<OPTION value=""> 12h</OPTION>
 											</SELECT>
 										</div>
 										<div class="offset-2 offset-xl-0 offset-lg-0 offset-md-2 offset-sm-2"></div>
@@ -127,14 +134,10 @@
 											<!-- Select des minutes du premier verre -->
 											<SELECT name="premiermin" required>
 												<OPTION value="">min</OPTION>
-
-												<?php
-												$i = 0;
-												while ($i <= 55) {
-													echo "<OPTION value=" . $i . "> " . $i . "min</OPTION>";
-													$i = $i+5;
-												} ?>
-
+												<OPTION value="">0min</OPTION>
+												<OPTION value="">15min</OPTION>
+												<OPTION value="">30min</OPTION>
+												<OPTION value="">45min</OPTION>
 											</SELECT>
 										</div>
 									</div>
@@ -148,11 +151,18 @@
 											<!-- Select de l'heure du dernier verre -->
 											<SELECT name="dernierh" required>
 												<OPTION value=""> h</OPTION>
-
-												<?php for ($i = 0; $i < 24; $i++) {
-													echo "<OPTION value=" . $i . "> " . $i . "h</OPTION>";
-												} ?>
-
+												<OPTION value=""> 1h</OPTION>
+												<OPTION value=""> 2h</OPTION>
+												<OPTION value=""> 3h</OPTION>
+												<OPTION value=""> 4h</OPTION>
+												<OPTION value=""> 5h</OPTION>
+												<OPTION value=""> 6h</OPTION>
+												<OPTION value=""> 7h</OPTION>
+												<OPTION value=""> 8h</OPTION>
+												<OPTION value=""> 9h</OPTION>
+												<OPTION value=""> 10h</OPTION>
+												<OPTION value=""> 11h</OPTION>
+												<OPTION value=""> 12h</OPTION>			
 											</SELECT>
 										</div>
 										<div class="offset-2 offset-xl-0 offset-lg-0 offset-md-2 offset-sm-2"></div>
@@ -160,14 +170,10 @@
 											<!-- Select des minutes du dernier verre -->
 											<SELECT name="derniermin" required>
 												<OPTION value="">min</OPTION>
-
-												<?php
-												$i = 0;
-												while ($i <= 59) {
-													echo "<OPTION value=" . $i . "> " . $i . "min</OPTION>";
-													$i = $i+5;
-												} ?>
-
+												<OPTION value="">0min</OPTION>
+												<OPTION value="">15min</OPTION>
+												<OPTION value="">30min</OPTION>
+												<OPTION value="">45min</OPTION>
 											</SELECT>
 										</div>
 									</div>
@@ -190,7 +196,7 @@
 								<div class="offset-xl-3 offset-lg-3 offset-md-2 offset-sm-0 offset-0"></div>
 								<div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-5 ">
 									<!-- Select du dosage-->
-									<SELECT name="dosage" required>
+									<SELECT name="dosage">
 										<OPTION value="">Dosage</OPTION>
 										<OPTION selected value="bar"> BAR</OPTION>
 										<OPTION value="maison"> MAISON </OPTION>
